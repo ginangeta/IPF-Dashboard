@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class CustomersController extends Controller
 {
@@ -366,8 +367,10 @@ class CustomersController extends Controller
         $payment_data = json_decode($payment_response);
 
         // dd($payment_data);
-
-        if ($payment_data->response_code != 200) {
+        if (!$payment_data) {
+            Log::error("No response");
+            return;
+        } else if ($payment_data->response_code != 200) {
             return response()->json($payment_data);
         } else {
             $other_ref = $payment_data->resource->transactions[0]->other_ref;
