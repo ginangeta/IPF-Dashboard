@@ -26,7 +26,7 @@
                                             <td>{{ $customer->payment_status }}</td>
                                             <td>{{ $customer->customer_lead_id }}</td>
                                             <td>{{ number_format($customer->amount) }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($customer->date_time_added)->format('d/m/y h:i a') }}
+                                            <td>{{ date("Y-m-d H:i:s",$customer->date_time_added) }}
                                             </td>
                                         </tr>
                                     @endforeach

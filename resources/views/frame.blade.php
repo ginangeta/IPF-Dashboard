@@ -98,6 +98,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url('users') }}">
+                            <i class="nc-icon nc-bullet-list-67"></i>
+                            <p>Users</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url('signin') }}">
                             <i class="nc-icon nc-settings-gear-64"></i>
                             <p>Log Out</p>

@@ -8,7 +8,7 @@ use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\OffersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SiteController;
-
+use App\Http\Controllers\UsersController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -67,3 +67,8 @@ Route::get('/message_template/{id}', [MessagesController::class, 'getMessagesTem
 
 Route::get('/offers', [OffersController::class, 'getOffers'])->name('offers');
 Route::post('/offers', [OffersController::class, 'storeOffer'])->name('offers');
+Route::post('/edit_offers', [OffersController::class, 'editOffer'])->name('edit.offer');
+
+Route::get('/users', [UsersController::class, 'getUsers'])->name('users');
+Route::post('/users', [UsersController::class, 'storeUser'])->name('users');
+Route::post('/edit_users', [UsersController::class, 'editUser'])->name('edit.user');

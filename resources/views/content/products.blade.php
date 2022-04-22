@@ -88,7 +88,7 @@
                                             <td>{{ $product->product_id }}</td>
                                             <td>{{ $product->product_name }}</td>
                                             <td>{{ $product->product_status }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($product->date_time_added)->format('D jS M y h:i a') }}
+                                            <td>{{ date("Y-m-d H:i:s",$product->date_time_added) }}
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
@@ -126,14 +126,14 @@
                                                             <h6><strong>Date Added</strong></h6>
                                                             {{-- <p class="mb-0">{{ $product->modified_by }}</p> --}}
                                                             <small class="mb-0">
-                                                                {{ \Carbon\Carbon::parse($product->date_time_added)->format('D jS M y h:i a') }}
+                                                                {{ date("Y-m-d H:i:s",$product->date_time_added) }}
                                                             </small>
                                                             <hr>
 
                                                             <h6><strong>Last Modified</strong></h6>
                                                             {{-- <p class="mb-0">{{ $product->modified_by }}</p> --}}
                                                             <small class="mb-0">
-                                                                {{ \Carbon\Carbon::parse($product->date_time_added)->format('D jS M y h:i a') }}
+                                                                {{ date("Y-m-d H:i:s",$product->date_time_added) }}
                                                             </small>
                                                             <hr>
 

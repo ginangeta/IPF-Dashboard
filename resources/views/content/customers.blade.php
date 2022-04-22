@@ -124,7 +124,7 @@
                                                 <td>{{ $customer->email_address }}</td>
                                                 <td>{{ $customer->pin_number }}</td>
                                                 <td>{{ $customer->registered_by_msisdn }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($customer->date_time_added)->format('d/m/y') }}
+                                                <td>{{ date("Y-m-d H:i:s",$customer->date_time_added) }}
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -87,7 +87,7 @@ class AuthController extends Controller
                 }
             } else {
                 // return redirect()->route('home');
-                return Redirect::back()->withErrors($data->message->messages);
+                return Redirect::back()->withErrors($data->message->message);
             }
         }
     }

@@ -77,4 +77,50 @@ class OffersController extends Controller
             return Redirect::back()->withErrors($data->errors[0]->message);
         }
     }
+
+    public function editOffer()
+    {
+        // dd(request()->all());
+        $this->url = config('urls.url');
+        $url = $this->url . 'offers';
+
+        $data = request()->validate([
+            "category_id" => ['required'],
+            "deposit_formulae" => ['required'],
+            "installment_formulae" => ['required'],
+            "interest_rate" => ['required'],
+            "offer" => ['required'],
+            "offer_status" => ['required'],
+            "product_id" => ['required'],
+            "tenure" => ['required'],
+            "offer_id" => ['required'],
+            "record_version" => ['required'],
+        ]);
+
+        $data = [
+            "category_id" => (int)request('category_id'),
+            "deposit_formulae" => request('deposit_formulae'),
+            "installment_formulae" => request('installment_formulae'),
+            "interest_rate" => (int)request('interest_rate'),
+            "offer" => request('offer'),
+            "offer_status" => request('offer_status'),
+            "product_id" => (int)request('product_id'),
+            "tenure" => (int)request('tenure'),
+            "offer_id" => (int)request('offer_id'),
+            "record_version" => (int)request('offer_id')
+        ];
+
+        // dd($data);
+        $response = $this->put_curl($url, $data);
+        dd($response);
+
+        $data = json_decode($response);
+
+        dd($data);
+        if ($data->response_code == 200) {
+            return Redirect::back();
+        } else {
+            return Redirect::back()->withErrors($data->errors[0]->message);
+        }
+    }
 }

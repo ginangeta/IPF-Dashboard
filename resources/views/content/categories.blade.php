@@ -85,7 +85,7 @@
                                             <td>{{ $category->category }}</td>
                                             <td>{{ $category->brief }}</td>
                                             <td>{{ $category->category_status }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($category->date_time_added)->format('D jS M y h:i a') }}
+                                            <td>{{ date("Y-m-d H:i:s",$category->date_time_added) }}
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
@@ -124,14 +124,14 @@
                                                             <h6><strong>Date Added</strong></h6>
                                                             <p class="mb-0">{{ $category->modified_by }}</p>
                                                             <small class="mb-0">
-                                                                {{ \Carbon\Carbon::parse($category->date_time_added)->format('D jS M y h:i a') }}
+                                                                {{ date("Y-m-d H:i:s",$category->date_time_added) }}
                                                             </small>
                                                             <hr>
 
                                                             <h6><strong>Last Modified</strong></h6>
                                                             <p class="mb-0">{{ $category->modified_by }}</p>
                                                             <small class="mb-0">
-                                                                {{ \Carbon\Carbon::parse($category->date_time_added)->format('D jS M y h:i a') }}
+                                                                {{ date("Y-m-d H:i:s",$category->date_time_added) }}
                                                             </small>
                                                             <hr>
 

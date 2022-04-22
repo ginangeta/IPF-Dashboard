@@ -99,7 +99,7 @@
                                                 </span>
                                             </td>
                                             <td>{{ $template->added_by }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($template->date_time_added)->format('d/m/y') }}
+                                            <td>{{ date("Y-m-d H:i:s",$template->date_time_added) }}
                                             </td>
 
                                             {{-- Modals --}}

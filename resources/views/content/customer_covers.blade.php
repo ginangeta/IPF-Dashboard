@@ -89,11 +89,11 @@
                                             <td>{{ $customer->use_type }}</td>
                                             <td>{{ number_format($customer->car_value) }}</td>
                                             <td>{{ number_format($customer->premium) }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($customer->start_date)->format('d/m/y') }}
+                                            <td>{{ date("Y-m-d H:i:s",$customer->start_date) }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($customer->end_date)->format('d/m/y') }}
+                                            <td>{{ date("Y-m-d H:i:s",$customer->end_date) }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($customer->date_time_added)->format('d/m/y h:i a') }}
+                                            <td>{{ date("Y-m-d H:i:s",$customer->date_time_added) }}
                                             </td>
                                         </tr>
                                     @endforeach

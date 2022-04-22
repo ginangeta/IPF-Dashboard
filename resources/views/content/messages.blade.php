@@ -36,7 +36,7 @@
                                                 </span>
                                             </td>
                                             <td>{{ $message->sender }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($message->date_time_added)->format('d/m/y') }}
+                                            <td>{{ date("Y-m-d H:i:s",$message->date_time_added) }}
                                             </td>
                                         </tr>
                                     @endforeach

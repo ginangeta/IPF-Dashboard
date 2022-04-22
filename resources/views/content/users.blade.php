@@ -1,28 +1,28 @@
 @extends('frame')
 @section('title')
-    Offers
+    Users
 @endsection
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 d-flex justify-content-end mb-2">
-                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal" data-target="#create_offer"><i
+                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal" data-target="#create_user"><i
                         class="zmdi zmdi-edit"></i>Create</button>
 
-                <div class="modal fade" id="create_offer" tabindex="-1" role="dialog"
+                <div class="modal fade" id="create_user" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title text-capitalize" id="exampleModalLongTitle">
-                                    Create Offer</h5>
+                                    Create User</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <form method="POST" class="form-horizontal" novalidate="" method="POST"
-                                    action="{{ url('offers') }}">
+                                    action="{{ url('users') }}">
                                     @csrf
                                     @if ($errors->any())
                                         <p class="alert alert-danger">{{ $errors->first() }}</p>
@@ -33,70 +33,72 @@
                                     <div class="row p-4">
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label>Product Category</label>
-                                                <select name="category_id" class="form-control" id="category_id">
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->category_id }}">
-                                                            {{ $category->category }}
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" name="user_first_name"
+                                                    aria-describedby="plateHelp" required placeholder="Enter User Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Middle Name</label>
+                                                <input type="text" class="form-control" name="user_middle_name"
+                                                    aria-describedby="plateHelp" required placeholder="Enter User Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input type="text" class="form-control" name="user_last_name"
+                                                    aria-describedby="plateHelp" required placeholder="Enter User Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>User Name</label>
+                                                <input type="text" class="form-control" name="user_name"
+                                                    aria-describedby="plateHelp" required placeholder="Enter User Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>User Email</label>
+                                                <input type="text" class="form-control" name="user_email"
+                                                    aria-describedby="plateHelp" required placeholder="Enter User Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>User Phone Number</label>
+                                                <input type="number" class="form-control" name="user_msisdn"
+                                                    aria-describedby="plateHelp" required
+                                                    placeholder="Enter User Phone Number">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>User Role</label>
+                                                <select name="role_id" class="form-control" id="role_id">
+                                                    @foreach ($roles as $role)
+                                                        <option value="{{ $role->role_id }}">
+                                                            {{ $role->role_name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Product</label>
-                                                <select name="product_id" class="form-control" id="product_id">
-                                                    @foreach ($products as $product)
-                                                        <option value="{{ $product->product_id }}">
-                                                            {{ $product->product_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Deposit Formulae</label>
-                                                <input type="text" class="form-control" name="deposit_formulae"
-                                                    aria-describedby="plateHelp" required
-                                                    placeholder="Enter Deposit Formulae (=B)">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Installement Formulae</label>
-                                                <input type="text" class="form-control" name="installment_formulae"
-                                                    aria-describedby="plateHelp" required
-                                                    placeholder="Enter Installment Formulae (=A)">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Interest Rate</label>
-                                                <input type="number" class="form-control" name="interest_rate"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Interest Rate">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label>Offer</label>
-                                                <input type="text" class="form-control" name="offer"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Offer (AA)">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" name="new_password"
+                                                    aria-describedby="plateHelp" required placeholder="Enter Password">
                                             </div>
                                         </div>
+
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label>Tenure</label>
-                                                <input type="number" class="form-control" name="tenure"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Tenure">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Offer Status</label>
-                                                <select name="offer_status" class="form-control" id="offer_status">
+                                                <label>User Status</label>
+                                                <select name="user_status" class="form-control" id="user_status">
                                                     <option value="ACTIVE">Active</option>
                                                     <option value="INACTIVE">Inactive</option>
                                                 </select>
@@ -118,39 +120,36 @@
                         <div class="card-body table-full-width table-responsive">
                             <table class="table-hover table-striped table" id="data-table">
                                 <thead>
-                                    <th>Id</th>
-                                    <th>Status</th>
-                                    <th>Offer</th>
-                                    <th>Tenure</th>
-                                    <th>Interest Rate</th>
-                                    <th>Deposit Formulae</th>
-                                    <th>Installment Formulae</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>User Type</th>
                                     <th>Created At</th>
                                     <th>Actions</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($offers as $offer)
+                                    @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ $offer->offer_id }}</td>
-                                            <td>{{ $offer->offer_status }}</td>
-                                            <td>{{ $offer->offer }}</td>
-                                            <td>{{ $offer->tenure }}</td>
-                                            <td>{{ $offer->interest_rate }}</td>
-                                            <td>{{ $offer->deposit_formulae }}</td>
-                                            <td>{{ $offer->installment_formulae }}</td>
-                                            <td>{{ date("Y-m-d H:i:s",$offer->date_time_added) }}
+                                            <td>{{ $user->user_first_name . ' ' . $user->user_middle_name . ' ' . $user->user_last_name }}
+                                            </td>
+                                            <td>{{ $user->user_name }}</td>
+                                            <td>{{ $user->user_email }}</td>
+                                            <td>{{ $user->user_msisdn }}</td>
+                                            <td>{{ $user->user_type }}</td>
+                                            <td>{{ date('Y-m-d H:i a', $user->date_time_added) }}
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                    data-target="#details{{ $offer->offer_id }}"><i
+                                                    data-target="#details{{ $user->user_id }}"><i
                                                         class="zmdi zmdi-eye"></i>Details</button>
                                                 <button type="button" class="btn btn-warning btn-sm ml-2"
-                                                    data-toggle="modal" data-target="#edit{{ $offer->offer_id }}"><i
+                                                    data-toggle="modal" data-target="#edit{{ $user->user_id }}"><i
                                                         class="zmdi zmdi-edit"></i>Edit</button>
                                             </td>
                                             {{-- Modals --}}
-                                            @include('content.includes.offer_details')
-                                            @include('content.includes.edit_offer')
+                                            {{-- @include('content.includes.user_details')
+                                            @include('content.includes.edit_user') --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
