@@ -149,8 +149,8 @@
                                                         class="zmdi zmdi-edit"></i>Edit</button>
                                             </td>
                                             {{-- Modals --}}
-                                            @include('content.includes.offer_details')
-                                            @include('content.includes.edit_offer')
+                                            @include('content.includes.offers.offer_details')
+                                            @include('content.includes.offers.edit_offer')
                                         </tr>
                                     @endforeach
                                 </tbody>
