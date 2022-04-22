@@ -195,7 +195,7 @@
                             <div class="d-flex align-items-center flex-column">
                                 <img src="{{ url('assets/img/success.png') }}" style="max-width: 100px;">
                                 <div class="status">
-                                    Payment <span class="payment_code"></span> Made Successfully
+                                    Payment <span class="payment_code"></span> Made Initiated Successfully
                                     <span class="status__dot">.</span><span class="status__dot">.</span><span
                                         class="status__dot">.</span>
                                 </div>
