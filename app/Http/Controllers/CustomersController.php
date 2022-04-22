@@ -369,7 +369,12 @@ class CustomersController extends Controller
         // dd($payment_data);
         if (!$payment_data) {
             Log::error("No response");
-            return;
+            $error_data = [
+                'response_code' => 500,
+                'message' => "No response"
+            ];
+
+            return response()->json($payment_data);
         } else if ($payment_data->response_code != 200) {
             return response()->json($payment_data);
         } else {

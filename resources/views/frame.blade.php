@@ -97,6 +97,12 @@
                             <p>Messages</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('signin') }}">
+                            <i class="nc-icon nc-settings-gear-64"></i>
+                            <p>Log Out</p>
+                        </a>
+                    </li>
                     <li class="nav-item active active-pro d-none">
                         <a class="nav-link active" href="upgrade.html">
                             <i class="nc-icon nc-settings-gear-64"></i>

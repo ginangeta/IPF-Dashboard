@@ -265,9 +265,8 @@
                         $('.success').removeClass('d-none').siblings().addClass('d-none');
                         $('.close').removeClass('d-none');
                     } else {
-                        $.each(data.errors, function(key, val) {
-                            toastr.error(val.message);
-                        });
+                        $('#payment').modal('hide');
+                        toastr.error("Payment Initiation Failed. Please Try Again Later.");
                     }
                 }).fail(function(data) {
                     $.each(data.errors, function(key, val) {
