@@ -42,6 +42,7 @@ class AuthController extends Controller
         } else {
             $status = $data->response_code;
             $message = $data->message;
+            $previous_url = null;
             if ($status == 200) {
                 $auth = $data;
 
@@ -75,8 +76,7 @@ class AuthController extends Controller
                     if (Session::get('Reset')) {
                         return redirect()->route('password.new');
                     } else {
-                        $previous_url = Session::get('url');
-                        $previous_url = null;
+                        $previous_url = Session::get('previous_url');
 
                         if (is_null($previous_url)) {
                             return redirect()->route('home');

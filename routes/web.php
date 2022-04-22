@@ -39,16 +39,25 @@ Route::get('/customers', [CustomersController::class, 'getCustomers'])->name('cu
 Route::post('/storeLead', [CustomersController::class, 'storeCustomerLeads'])->name('storeLead');
 // Route::get('/customers_leads/{id}', [CustomersController::class, 'getCustomerLeadView'])->name('leads.view');
 Route::get('/lead_application/{id}', [CustomersController::class, 'getCustomerLeadApplicationView'])->name('lead.application');
+
+Route::get('/lead_quotation/{id}', [CustomersController::class, 'getCustomerLeadQuotationView'])->name('lead.quotation.view');
+Route::post('/get_quotation', [CustomersController::class, 'getQuotation'])->name('lead.quotation');
+// Route::get('/submit_lead_quotation/{id}', [CustomersController::class, 'submitQuotation'])->name('submit.lead.quotation');
+
+Route::get('/lead_payment/{id}', [CustomersController::class, 'getLeadPaymentView'])->name('lead.payment');
+Route::post('/application_payment', [CustomersController::class, 'submitApplicationPayment'])->name('application_payment');
+
 Route::get('/customers_covers', [CustomersController::class, 'getCustomerCovers'])->name('customers.covers');
 Route::get('/customers_cover/{id}', [CustomersController::class, 'getCustomerCovers'])->name('customers.cover');
 
 Route::get('/customers_payments', [CustomersController::class, 'getCustomerPayments'])->name('customers.payments');
 Route::get('/customers_payments/{id}', [CustomersController::class, 'getCustomerPayments'])->name('customers.payment');
-Route::post('/application_payment', [CustomersController::class, 'submitApplicationPayment'])->name('application_payment');
 
 Route::get('/categories', [CategoriesController::class, 'getCategories'])->name('categories');
+Route::post('/categories', [CategoriesController::class, 'storeCategories'])->name('categories');
 
 Route::get('/products', [ProductsController::class, 'getProducts'])->name('products');
+Route::post('/products', [ProductsController::class, 'storeProduct'])->name('products');
 
 Route::get('/messages', [MessagesController::class, 'getMessages'])->name('messages');
 Route::post('/store_template', [MessagesController::class, 'storeMessagesTemplate'])->name('store.template');

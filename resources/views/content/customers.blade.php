@@ -114,7 +114,7 @@
                                                     <input type="checkbox" value="{{ $customer->msisdn }}"
                                                         class="form-control customers-checkbox" name="contacts">
                                                 </td>
-                                                <td><a href="{{ route('lead.application', $customer->customer_id) }}">
+                                                <td><a href="{{ route('lead.quotation.view', $customer->customer_id) }}">
                                                         {{ $customer->first_name . ' ' . $customer->last_name }}
                                                     </a>
                                                 </td>

@@ -21,6 +21,7 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ url('assets/css/demo.css') }}" rel="stylesheet" />
     <link href="{{ url('assets/css/table.css') }}" rel="stylesheet" />
+    <link href="{{ url('assets/css/car-loader.css') }}" rel="stylesheet" />
 
     {{-- Toastr --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
@@ -28,7 +29,7 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-color="orange" data-image="{{ url('assets/img/sidebar-4.jpg') }}">
+        <div class="sidebar" data-color="red" data-image="{{ url('assets/img/sidebar-4.jpg') }}">
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="#" class="simple-text">
@@ -141,6 +142,30 @@
                 </div>
             </footer>
         </div>
+        {{-- Progress --}}
+        <div class="modal fade" id="progress_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="loader">
+                            <div class="d-flex align-items-center flex-column">
+                                <div class="clock-loader"></div>
+                                <div class="status">
+                                    <span class="progress_title">
+                                        Verifying Application Details
+                                    </span>
+                                    <span class="status__dot">.</span><span class="status__dot">.</span><span
+                                        class="status__dot">.</span>
+                                </div>
+                                <small class="progress_text">Kindly be patient as we verify your account
+                                    details</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <!--   Core JS Files   -->
@@ -178,6 +203,8 @@
             // console.log(Date.parse(endtime), Date.parse(new Date()));
             if (Date.parse(endtime) < Date.parse(new Date())) {
                 // location.href("{{ route('signin') }}");
+                var url = window.location.href;
+                `{{ Session::put('previous_url', `+url+`) }}`;
                 window.location.replace("{{ route('signin') }}");
 
             } else {

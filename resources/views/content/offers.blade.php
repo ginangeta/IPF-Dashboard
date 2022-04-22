@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 d-flex justify-content-end">
+            <div class="col-12 d-flex justify-content-end mb-2">
                 <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal" data-target="#create_offer"><i
                         class="zmdi zmdi-edit"></i>Create</button>
 
@@ -46,7 +46,7 @@
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>Product</label>
-                                                <select name="category_id" class="form-control" id="product_id">
+                                                <select name="product_id" class="form-control" id="product_id">
                                                     @foreach ($products as $product)
                                                         <option value="{{ $product->product_id }}">
                                                             {{ $product->product_name }}
