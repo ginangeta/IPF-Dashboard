@@ -3,102 +3,90 @@
     Customers Covers
 @endsection
 @section('content')
-    <style>
-        .clock-loader {
-            --clock-color: #e01703;
-            --clock-width: 4rem;
-            --clock-radius: calc(var(--clock-width) / 2);
-            --clock-minute-length: calc(var(--clock-width) * 0.4);
-            --clock-hour-length: calc(var(--clock-width) * 0.2);
-            --clock-thickness: 0.2rem;
-
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: var(--clock-width);
-            height: var(--clock-width);
-            border: 3px solid var(--clock-color);
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-
-        .clock-loader::before,
-        .clock-loader::after {
-            position: absolute;
-            content: "";
-            top: calc(var(--clock-radius) * 0.25);
-            width: var(--clock-thickness);
-            background: var(--clock-color);
-            border-radius: 10px;
-            transform-origin: center calc(100% - calc(var(--clock-thickness) / 2));
-            animation: spin infinite linear;
-        }
-
-        .clock-loader::before {
-            height: var(--clock-minute-length);
-            animation-duration: 2s;
-        }
-
-        .clock-loader::after {
-            top: calc(var(--clock-radius) * 0.25 + var(--clock-hour-length));
-            height: var(--clock-hour-length);
-            animation-duration: 15s;
-        }
-
-
-        @keyframes spin {
-            to {
-                transform: rotate(1turn);
-            }
-        }
-
-    </style>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <div class="card">
+            <div class="col-md-5 col-sm-12 d-sm-none d-md-flex">
+                <div class="card h-100 w-100">
+                    <div class="card-header">
+                        <h4 class="card-title">IPF Application Deposit Payment
+                            {{ @$cover[0]->car_reg_number }}
+                        </h4>
+                        <p class="mb-0">For Loan Amount: {{ @$cover[0]->loan }}</p>
+                    </div>
                     <div class="card-body">
-                        <div class="card-body table-full-width table-responsive">
-                            <table class="table-hover table-striped table" id="data-table">
-                                <thead>
-                                    <th>#</th>
-                                    <th>Cover Status</th>
-                                    <th>Cover Type</th>
-                                    <th>Car Reg Number</th>
-                                    <th>Policy Number</th>
-                                    <th>Car Use Type</th>
-                                    <th>Car Value</th>
-                                    <th>Policy Premium</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Created At</th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($customers as $customer)
-                                        <tr>
-                                            <td><a href="{{ route('lead.payment', $customer->customer_cover_id) }}"
-                                                    >
-                                                    {{ $customer->customer_cover_id }}
-                                                </a>
-                                            </td>
-                                            <td>{{ $customer->customer_cover_status }}</td>
-                                            <td>{{ $customer->cover_type }}</td>
-                                            <td>{{ $customer->car_reg_number }}</td>
-                                            <td>{{ $customer->policy_number }}</td>
-                                            <td>{{ $customer->use_type }}</td>
-                                            <td>{{ number_format($customer->car_value) }}</td>
-                                            <td>{{ number_format($customer->premium) }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($customer->start_date)->format('d/m/y') }}
-                                            </td>
-                                            <td>{{ \Carbon\Carbon::parse($customer->end_date)->format('d/m/y') }}
-                                            </td>
-                                            <td>{{ \Carbon\Carbon::parse($customer->date_time_added)->format('d/m/y h:i a') }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <img src="{{ url('img/happy_payment.jpg') }}" alt="logo" class="img-fluid mt-4">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-12">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="card-title">IPF Application Details
+                            {{ @$cover[0]->car_reg_number }}
+                        </h4>
+                        <p class="mb-0">Details of the loan application</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Cover Status : </span>
+                                <strong>
+                                    <span>{{ @$cover[0]->customer_cover_status }}</span>
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Car Use : </span>
+                                <strong>
+                                    <span>{{ @$cover[0]->use_type }}</span>
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Premium (a) : </span>
+                                <strong>
+                                    KES <span>{{ number_format(@$cover[0]->premium) }}</span>
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Deposit (b) : </span>
+                                <strong>
+                                    KES <span>{{ number_format(@$cover[0]->deposit) }}</span>
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Balance : </span>
+                                <strong>
+                                    KES <span>{{ number_format(@$cover[0]->balance) }}</span>
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Instalment : </span>
+                                <strong>
+                                    KES <span>{{ number_format(@$cover[0]->installment) }}</span>
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Start Date : </span>
+                                <strong>
+                                    <span>{{ \Carbon\Carbon::parse(@$cover[0]->start_date)->format('jS M Y') }}</span>
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>End Date : </span>
+                                <strong>
+                                    <span>{{ \Carbon\Carbon::parse(@$cover[0]->end_date)->format('jS M Y') }}</span>
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Application Date : </span>
+                                <strong>
+                                    <span>{{ \Carbon\Carbon::parse(@$cover[0]->date_time_added)->format('jS M Y') }}</span>
+                                </strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="cover_id btn btn-info btn-secondary">Pay</button>
                         </div>
                     </div>
                 </div>
@@ -131,7 +119,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link btn-neutral">Back</button>
+                        <button type="button" class="btn btn-link btn-neutral" data-dismiss="modal">Back</button>
                         <button type="button" class="btn btn-link btn-neutral" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -183,8 +171,10 @@
                                 <label for="payment_phone">Mobile Number</label>
                                 <input type="number" name="payment_phone" class="form-control" id="payment_phone"
                                     placeholder="Enter Mobile Number">
-                                <span class="btn btn-primary btn-round btn-block pay" style="margin-top:30px !important"
-                                    id="payment_push" type="button">
+                                <label for="expected_name">Expected Name</label>
+                                <input type="text" name="expected_name" class="form-control" id="expected_name"
+                                    placeholder="Enter Mpesa Expected Name" style="text-transform:uppercase">
+                                <span class="btn btn-primary btn-round btn-block pay mt-2" id="payment_push" type="button">
                                     Send Payment Push
                                 </span>
                             </div>
@@ -248,6 +238,7 @@
                 $('.close').addClass('d-none');
 
                 var payment_phone = $('input[name=payment_phone]').val();
+                var expected_name = $('input[name=expected_name]').val();
                 $('.phone-number').html(payment_phone);
 
                 console.log(cover_id);
@@ -261,7 +252,11 @@
 
                 $.post("{{ url('application_payment') }}", {
                     payment_phone: payment_phone,
-                    cover_id: cover_id,
+                    expected_name: expected_name,
+                    cover_id: `{{ @$cover[0]->customer_cover_id }}`,
+                    customer_id: `{{ @$cover[0]->customer_id }}`,
+                    customer_lead_id: `{{ @$cover[0]->customer_lead_id }}`,
+                    deposit: `{{ @$cover[0]->deposit }}`,
                 }).done(function(data) {
                     console.log("ResponseText:" + data);
                     if (data.response_code == 200) {

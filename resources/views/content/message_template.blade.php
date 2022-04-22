@@ -1,6 +1,6 @@
 @extends('frame')
 @section('title')
-    Messages
+    Messages Templates
 @endsection
 @section('content')
     <div class="container-fluid">

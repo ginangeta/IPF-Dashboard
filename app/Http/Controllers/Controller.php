@@ -98,4 +98,35 @@ class Controller extends BaseController
 
         curl_close($ch);
     }
+
+
+    function payment_curl($url, $data)
+    {
+        $headers = array(
+            'Content-Type: application/json',
+            'Authorization: Basic ' . base64_encode('yOjQAFTuev:Y6OpDDnMytJLSMB')
+        );
+        // dd($headers);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER,  $headers);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $output = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        /*if($httpcode != 200)
+            {
+            $this->session->set_flashdata( "error", "An error has ocurred . Try again" );
+            redirect('land');
+            }
+        */
+        curl_close($ch);
+        return $output;
+    }
 }

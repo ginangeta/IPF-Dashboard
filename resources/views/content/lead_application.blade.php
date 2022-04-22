@@ -12,6 +12,8 @@
                         <h4 class="card-title">IPF Application
                             {{ @$customers->first_name . ' ' . @$customers->last_name }}
                         </h4>
+                        {{-- @dd(@$quotation->plate_number) --}}
+                        <p class="mb-0">For Vehicle: {{ @$quotation->plate_number }}</p>
                     </div>
                     <div class="card-body">
                         <form method="POST" class="form-horizontal" novalidate="" method="POST"
@@ -25,26 +27,24 @@
                             @endif
                             <div class="row p-4">
                                 <input type="hidden" name="customer_id" value="{{ @$customers->customer_id }}">
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>Car Registration Number</label>
-                                        <input type="text" class="form-control" name="car_reg_number"
-                                            aria-describedby="plateHelp" placeholder="Enter Plate Number"
-                                            style="text-transform:uppercase" size="7" maxlength="7">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>Balance</label>
-                                        <input type="number" class="form-control" name="balance"
-                                            aria-describedby="plateHelp" placeholder="Enter balance">
-                                    </div>
-                                </div>
+                                <input type="hidden" name="car_reg_number" value="{{ @$quotation->plate_number }}">
+                                <input type="hidden" name="installment" value="{{ @$quotation->data->installment }}">
+                                <input type="hidden" name="premium" value="{{ @$quotation->vehicle_premium }}">
+                                <input type="hidden" name="start_date" value="{{ @$quotation->dates->start_date }}">
+                                <input type="hidden" name="end_date" value="{{ @$quotation->dates->end_date }}">
+                                <input type="hidden" name="offer_id" value="{{ @$quotation->offer_id }}">
+                                <input type="hidden" name="loan" value="{{ @$quotation->data->total }}">
+                                <input type="hidden" name="car_value" value="{{ @$quotation->car_value }}">
+                                <input type="hidden" name="interest_rate" value="10">
+                                <input type="hidden" name="balance" value="0">
+                                <input type="hidden" name="tenure" value="1">
+
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label>Deposit Amount</label>
                                         <input type="number" class="form-control" name="deposit"
-                                            aria-describedby="plateHelp" placeholder="Enter Deposit Amount">
+                                            value="{{ @$quotation->data->deposit }}" aria-describedby="plateHelp"
+                                            placeholder="Enter Deposit Amount">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
@@ -55,64 +55,6 @@
                                             <option value="PENDING_PAYMENT">Pending Payment</option>
                                             <option value="PAID">PAID</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>Installments</label>
-                                        <input type="number" class="form-control" name="installment"
-                                            aria-describedby="plateHelp" placeholder="Enter Installments">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>Interest Rate</label>
-                                        <input type="number" class="form-control" name="interest_rate"
-                                            aria-describedby="plateHelp" placeholder="Enter Interest Rate">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>Loan</label>
-                                        <input type="number" class="form-control" name="loan" aria-describedby="plateHelp"
-                                            placeholder="Enter Loan Amount">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>Start Date</label>
-                                        <input type="date" class="form-control" name="start_date">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>End Date</label>
-                                        <input type="date" class="form-control" name="end_date">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>Offer ID</label>
-                                        <select name="offer_id" class="form-control" id="offer_id">
-                                            @foreach ($offers as $offer)
-                                                <option value="{{ $offer->offer_id }}">{{ $offer->offer }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>Premium</label>
-                                        <input type="number" class="form-control" name="premium"
-                                            aria-describedby="plateHelp" placeholder="Enter Premium Amount">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group">
-                                        <label>Tenure</label>
-                                        <input type="text" class="form-control" name="tenure" aria-describedby="plateHelp"
-                                            placeholder="Enter Tenure">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
@@ -134,6 +76,12 @@
                                     <div class="form-group">
                                         <label>Year of Registration</label>
                                         <input type="number" class="form-control" name="year_of_registration">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Chasis Number</label>
+                                        <input type="text" class="form-control" name="chassisNumber">
                                     </div>
                                 </div>
                             </div>
