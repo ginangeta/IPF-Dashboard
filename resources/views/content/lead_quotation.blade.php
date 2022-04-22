@@ -33,7 +33,7 @@
                                         <strong>KES <span class="premium_facility_fee"></span></strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
-                                        <span>Payable now (b+c) : </span>
+                                        <span>Payable now (a+c) : </span>
                                         <strong>KES <span class="premium_payable"></span></strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
