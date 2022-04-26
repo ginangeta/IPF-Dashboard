@@ -67,19 +67,19 @@
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Start Date : </span>
                                 <strong>
-                                    <span>{{ date("Y-m-d H:i:s",@$cover[0]->start_date)->format('jS M Y') }}</span>
+                                    <span>{{ date("Y-m-d H:i:s",@$cover[0]->start_date) }}</span>
                                 </strong>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>End Date : </span>
                                 <strong>
-                                    <span>{{ date("Y-m-d H:i:s",@$cover[0]->end_date)->format('jS M Y') }}</span>
+                                    <span>{{ date("Y-m-d H:i:s",@$cover[0]->end_date) }}</span>
                                 </strong>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Application Date : </span>
                                 <strong>
-                                    <span>{{ date("Y-m-d H:i:s",@$cover[0]->date_time_added)->format('jS M Y') }}</span>
+                                    <span>{{ date("Y-m-d H:i:s",@$cover[0]->date_time_added) }}</span>
                                 </strong>
                             </li>
                         </ul>
