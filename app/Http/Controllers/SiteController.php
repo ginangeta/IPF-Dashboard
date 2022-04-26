@@ -11,7 +11,27 @@ class SiteController extends Controller
 {
     public function home()
     {
-        return view('content.dashboard');
+        if (Session::get('token') != null) {
+            $this->url = config('urls.auth');
+            $url = $this->url . 'oauth/verify';
+
+            $data = [
+                "token" => Session::get('token'),
+            ];
+
+            $response = $this->to_curl($url, $data);
+            $data = json_decode($response);
+
+            // dd($data);
+
+            if ($data->response_code == 200) {
+                return view('content.dashboard');
+            } else {
+                return Redirect::back()->withErrors($data->errors[0]->message);
+            }
+        } else {
+            return route('signin');
+        }
     }
 
     public function signup()
@@ -57,7 +77,7 @@ class SiteController extends Controller
 
     public function submitApplication()
     {
-        dd(request()->all());
+        // dd(request()->all());
         $this->url = config('urls.url');
         $url = $this->url . 'api/v1/customer_leads';
 

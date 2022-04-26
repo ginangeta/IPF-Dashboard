@@ -64,7 +64,7 @@ class UsersController extends Controller
         ];
 
         // dd($data);
-        $response = $this->put_curl($users_url, $data);
+        $response = $this->to_curl($users_url, $data);
         $data = json_decode($response);
 
         // dd($data);
@@ -141,11 +141,10 @@ class UsersController extends Controller
         }
     }
 
-
     public function editUser()
     {
         // dd(request()->all());
-        $this->url = config('urls.url');
+        $this->url = config('urls.auth');
         $url = $this->url . 'api/v1/users/' . request('user_id');
 
         // dd($url);
@@ -178,7 +177,7 @@ class UsersController extends Controller
         // dd($response);
         $data = json_decode($response);
 
-        dd($data);
+        // dd($data);
         if ($data->response_code == 200) {
             return Redirect::back()->with('success', 'IT WORKS!');
         } else {
