@@ -64,22 +64,23 @@
                                     KES <span>{{ number_format(@$cover[0]->installment) }}</span>
                                 </strong>
                             </li>
+                            {{-- @dd($cover[0]->end_date, @$cover[0]->start_date) --}}
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Start Date : </span>
                                 <strong>
-                                    <span>{{ date("Y-m-d H:i:s",@$cover[0]->start_date) }}</span>
+                                    <span>{{ date('Y-m-d H:i a', substr(@$cover[0]->start_date, 0, -3)) }}</span>
                                 </strong>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>End Date : </span>
                                 <strong>
-                                    <span>{{ date("Y-m-d H:i:s",@$cover[0]->end_date) }}</span>
+                                    <span>{{ date('Y-m-d H:i a', substr(@$cover[0]->end_date, 0, -3)) }}</span>
                                 </strong>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Application Date : </span>
                                 <strong>
-                                    <span>{{ date("Y-m-d H:i:s",@$cover[0]->date_time_added) }}</span>
+                                    <span>{{ date('Y-m-d H:i a', @$cover[0]->date_time_added) }}</span>
                                 </strong>
                             </li>
                         </ul>
