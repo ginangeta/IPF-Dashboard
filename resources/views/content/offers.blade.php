@@ -114,48 +114,58 @@
             </div>
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="card-body table-full-width table-responsive">
-                            <table class="table-hover table-striped table" id="data-table">
-                                <thead>
-                                    <th>Id</th>
-                                    <th>Status</th>
-                                    <th>Offer</th>
-                                    <th>Tenure</th>
-                                    <th>Interest Rate</th>
-                                    <th>Deposit Formulae</th>
-                                    <th>Installment Formulae</th>
-                                    <th>Created At</th>
-                                    <th>Actions</th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($offers as $offer)
-                                        <tr>
-                                            <td>{{ $offer->offer_id }}</td>
-                                            <td>{{ $offer->offer_status }}</td>
-                                            <td>{{ $offer->offer }}</td>
-                                            <td>{{ $offer->tenure }}</td>
-                                            <td>{{ $offer->interest_rate }}</td>
-                                            <td>{{ $offer->deposit_formulae }}</td>
-                                            <td>{{ $offer->installment_formulae }}</td>
-                                            <td>{{ date("Y-m-d H:i:s",$offer->date_time_added) }}
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                    data-target="#details{{ $offer->offer_id }}"><i
-                                                        class="zmdi zmdi-eye"></i>Details</button>
-                                                <button type="button" class="btn btn-warning btn-sm ml-2"
-                                                    data-toggle="modal" data-target="#edit{{ $offer->offer_id }}"><i
-                                                        class="zmdi zmdi-edit"></i>Edit</button>
-                                            </td>
-                                            {{-- Modals --}}
-                                            @include('content.includes.offers.offer_details')
-                                            @include('content.includes.offers.edit_offer')
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="card-header">
+                        @if ($errors->any())
+                            <p class="alert alert-danger">{{ $errors->first() }}</p>
+                        @endif
+                        @if (Session::has('success'))
+                            <p class="alert alert-success">{{ Session::get('success') }}</p>
+                        @endif
+                    </div>
+                    <div class="card-body table-full-width table-responsive">
+                        <table class="table-hover table-striped table" id="data-table">
+                            <thead>
+                                <th>Id</th>
+                                <th>Status</th>
+                                <th>Offer</th>
+                                <th>Tenure</th>
+                                <th>Interest Rate</th>
+                                <th>Deposit Formulae</th>
+                                <th>Installment Formulae</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($offers as $offer)
+                                    <tr>
+                                        <td>{{ $offer->offer_id }}</td>
+                                        <td>{{ $offer->offer_status }}</td>
+                                        <td>{{ $offer->offer }}</td>
+                                        <td>{{ $offer->tenure }}</td>
+                                        <td>{{ $offer->interest_rate }}</td>
+                                        <td>{{ $offer->deposit_formulae }}</td>
+                                        <td>{{ $offer->installment_formulae }}</td>
+                                        <td>{{ date('Y-m-d H:i:s', $offer->date_time_added) }}
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
+                                                data-target="#details{{ $offer->offer_id }}"><i
+                                                    class="zmdi zmdi-eye"></i>Details</button>
+                                            <button type="button" class="btn btn-warning btn-sm ml-2" data-toggle="modal"
+                                                data-target="#edit{{ $offer->offer_id }}"><i
+                                                    class="zmdi zmdi-edit"></i>Edit</button>
+                                        </td>
+                                        {{-- Modals --}}
+                                        @include(
+                                            'content.includes.offers.offer_details'
+                                        )
+                                        @include(
+                                            'content.includes.offers.edit_offer'
+                                        )
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

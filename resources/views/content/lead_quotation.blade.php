@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <button type="button" id="compute_quote" class="btn btn-info btn-fill pull-right">Get
-                            Application</button>
+                            Quotation</button>
                         <div class="clearfix"></div>
                     </form>
                 </div>

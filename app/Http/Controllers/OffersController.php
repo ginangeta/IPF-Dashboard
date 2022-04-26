@@ -82,7 +82,8 @@ class OffersController extends Controller
     {
         // dd(request()->all());
         $this->url = config('urls.url');
-        $url = $this->url . 'offers';
+        $url = $this->url . 'offers/'.(int)request('offer_id');
+        // dd($url, Session::get('token'));
 
         $data = request()->validate([
             "category_id" => ['required'],
@@ -107,16 +108,16 @@ class OffersController extends Controller
             "product_id" => (int)request('product_id'),
             "tenure" => (int)request('tenure'),
             "offer_id" => (int)request('offer_id'),
-            "record_version" => (int)request('offer_id')
+            "record_version" => (int)request('record_version')
         ];
 
-        // dd($data);
+        // dd(json_encode($data));
         $response = $this->put_curl($url, $data);
-        dd($response);
+        // dd($response);
 
         $data = json_decode($response);
 
-        dd($data);
+        // dd($data);
         if ($data->response_code == 200) {
             return Redirect::back();
         } else {

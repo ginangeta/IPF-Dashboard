@@ -42,8 +42,8 @@ class UsersController extends Controller
             "user_name" => ['required'],
             "user_email" => ['required'],
             "user_msisdn" => ['required'],
-            "new_password" => ['required'],
             "user_status" => ['required'],
+            "new_password" => ['required'],
             "user_first_name" => ['required'],
             "user_middle_name" => ['required'],
             "user_last_name" => ['required'],
@@ -55,8 +55,8 @@ class UsersController extends Controller
             "user_type" => "API USER",
             "user_name" => request('user_name'),
             "user_email" => request('user_email'),
-            "user_msisdn" => request('user_msisdn'),
             "new_password" => request('new_password'),
+            "user_msisdn" => request('user_msisdn'),
             "user_status" => request('user_status'),
             "user_first_name" => request('user_first_name'),
             "user_middle_name" => request('user_middle_name'),
@@ -64,7 +64,7 @@ class UsersController extends Controller
         ];
 
         // dd($data);
-        $response = $this->to_curl($users_url, $data);
+        $response = $this->put_curl($users_url, $data);
         $data = json_decode($response);
 
         // dd($data);
@@ -111,47 +111,76 @@ class UsersController extends Controller
         }
     }
 
+    public function resetUserPassword()
+    {
+        // dd(request()->all());
+        $this->url = config('urls.auth');
+        $url = $this->url . 'api/v1/users/action/reset';
+
+        $data = request()->validate([
+            "user_name" => ['required'],
+            "user_email" => ['required'],
+            "user_msisdn" => ['required'],
+        ]);
+
+        $data = [
+            "user_name" => request('user_name'),
+            "user_email" => request('user_email'),
+            "user_msisdn" => request('user_msisdn'),
+        ];
+
+        // dd($data);
+        $response = $this->to_curl($url, $data);
+        $data = json_decode($response);
+        // dd($data);
+
+        if ($data->response_code == 200) {
+            return Redirect::back();
+        } else {
+            return Redirect::back()->withErrors($data->errors[0]->message);
+        }
+    }
+
+
     public function editUser()
     {
         // dd(request()->all());
         $this->url = config('urls.url');
-        $url = $this->url . 'users';
+        $url = $this->url . 'api/v1/users/' . request('user_id');
+
+        // dd($url);
 
         $data = request()->validate([
-            "category_id" => ['required'],
-            "deposit_formulae" => ['required'],
-            "installment_formulae" => ['required'],
-            "interest_rate" => ['required'],
-            "user" => ['required'],
+            "user_name" => ['required'],
+            "user_email" => ['required'],
+            "user_msisdn" => ['required'],
             "user_status" => ['required'],
-            "product_id" => ['required'],
-            "tenure" => ['required'],
-            "user_id" => ['required'],
-            "record_version" => ['required'],
+            "user_first_name" => ['required'],
+            "user_middle_name" => ['required'],
+            "user_last_name" => ['required'],
         ]);
 
         $data = [
-            "category_id" => (int)request('category_id'),
-            "deposit_formulae" => request('deposit_formulae'),
-            "installment_formulae" => request('installment_formulae'),
-            "interest_rate" => (int)request('interest_rate'),
-            "user" => request('user'),
+            "organisation_id" => 1,
+            "country_id" => 1,
+            "user_type" => "API USER",
+            "user_name" => request('user_name'),
+            "user_email" => request('user_email'),
+            "user_msisdn" => request('user_msisdn'),
             "user_status" => request('user_status'),
-            "product_id" => (int)request('product_id'),
-            "tenure" => (int)request('tenure'),
-            "user_id" => (int)request('user_id'),
-            "record_version" => (int)request('user_id')
+            "user_first_name" => request('user_first_name'),
+            "user_middle_name" => request('user_middle_name'),
+            "user_last_name" => request('user_last_name'),
         ];
 
         // dd($data);
         $response = $this->put_curl($url, $data);
-        dd($response);
-
+        // dd($response);
         $data = json_decode($response);
 
         dd($data);
         if ($data->response_code == 200) {
-            return Redirect::back();
+            return Redirect::back()->with('success', 'IT WORKS!');
         } else {
             return Redirect::back()->withErrors($data->errors[0]->message);
         }

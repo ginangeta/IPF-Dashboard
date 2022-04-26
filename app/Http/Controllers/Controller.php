@@ -68,7 +68,7 @@ class Controller extends BaseController
         curl_close($ch);
         return $output;
     }
-    function put_curl($url, $data)
+    function old_put_curl($url, $data)
     {
         $headers = array(
             'Content-Type: application/json',
@@ -80,13 +80,13 @@ class Controller extends BaseController
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-        curl_setopt($ch, CURLOPT_PUT, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER,  $headers);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         $output = curl_exec($ch);
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         /*if($httpcode != 200)
@@ -97,6 +97,41 @@ class Controller extends BaseController
         */
         curl_close($ch);
         return $output;
+    }
+
+    function put_curl($url, $data)
+    {
+        $headers = array(
+            'Content-Type: application/json',
+        );
+
+        (Session::get('token')) ? array_push($headers, 'Authorization: Bearer ' . Session::get('token')) : '';
+        // dd($headers);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "PUT",
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data)),
+            CURLOPT_HTTPHEADER => $headers,
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return "cURL Error #:" . $err;
+        } else {
+            return $response;
+        }
     }
 
     public function get_curl($url)

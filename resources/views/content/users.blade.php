@@ -116,45 +116,56 @@
             </div>
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="card-body table-full-width table-responsive">
-                            <table class="table-hover table-striped table" id="data-table">
-                                <thead>
-                                    <th>Name</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>User Type</th>
-                                    <th>Created At</th>
-                                    <th>Actions</th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($users as $user)
-                                        <tr>
-                                            <td>{{ $user->user_first_name . ' ' . $user->user_middle_name . ' ' . $user->user_last_name }}
-                                            </td>
-                                            <td>{{ $user->user_name }}</td>
-                                            <td>{{ $user->user_email }}</td>
-                                            <td>{{ $user->user_msisdn }}</td>
-                                            <td>{{ $user->user_type }}</td>
-                                            <td>{{ date('Y-m-d H:i a', $user->date_time_added) }}
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                    data-target="#details{{ $user->user_id }}"><i
-                                                        class="zmdi zmdi-eye"></i>Details</button>
-                                                <button type="button" class="btn btn-warning btn-sm ml-2"
-                                                    data-toggle="modal" data-target="#edit{{ $user->user_id }}"><i
-                                                        class="zmdi zmdi-edit"></i>Edit</button>
-                                            </td>
-                                            {{-- Modals --}}
-                                            {{-- @include('content.includes.user_details')
-                                            @include('content.includes.edit_user') --}}
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="card-header">
+                        @if ($errors->any())
+                            <p class="alert alert-danger">{{ $errors->first() }}</p>
+                        @endif
+                        @if (Session::has('success'))
+                            <p class="alert alert-success">{{ Session::get('success') }}</p>
+                        @endif
+                    </div>
+                    <div class="card-body table-full-width table-responsive">
+                        <table class="table-hover table-striped table" id="data-table">
+                            <thead>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>User Type</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($users as $user)
+                                    {{-- @dd($user->user_roles) --}}
+                                    <tr>
+                                        <td>{{ $user->user_first_name . ' ' . $user->user_middle_name . ' ' . $user->user_last_name }}
+                                        </td>
+                                        <td>{{ $user->user_name }}</td>
+                                        <td>{{ $user->user_email }}</td>
+                                        <td>{{ $user->user_msisdn }}</td>
+                                        <td>{{ $user->user_type }}</td>
+                                        <td>{{ date('Y-m-d H:i a', $user->date_time_added) }}
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
+                                                data-target="#details{{ $user->user_id }}"><i
+                                                    class="zmdi zmdi-eye"></i>Details</button>
+                                            <button type="button" class="btn btn-warning btn-sm ml-2" data-toggle="modal"
+                                                data-target="#edit{{ $user->user_id }}"><i
+                                                    class="zmdi zmdi-edit"></i>Edit</button>
+                                            <button type="button" class="btn btn-danger btn-sm ml-2" data-toggle="modal"
+                                                data-target="#reset_password{{ $user->user_id }}"><i
+                                                    class="zmdi zmdi-edit"></i>Reset Password</button>
+                                        </td>
+                                        {{-- Modals --}}
+                                        @include('content.includes.users.user_details')
+                                        @include('content.includes.users.edit_password')
+                                        @include('content.includes.users.edit_user')
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

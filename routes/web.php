@@ -72,3 +72,4 @@ Route::post('/edit_offers', [OffersController::class, 'editOffer'])->name('edit.
 Route::get('/users', [UsersController::class, 'getUsers'])->name('users');
 Route::post('/users', [UsersController::class, 'storeUser'])->name('users');
 Route::post('/edit_users', [UsersController::class, 'editUser'])->name('edit.user');
+Route::post('/reset_user_password', [UsersController::class, 'resetUserPassword'])->name('reset.user.password');
