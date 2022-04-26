@@ -65,6 +65,8 @@ class CustomersController extends Controller
             'id_number' => request()->id_number,
             'msisdn' => request()->msisdn,
         ];
+
+        // dd($data);
         $customers_response = $this->to_curl($customers_url, $data);
         $customers_data = json_decode($customers_response);
         // dd($customers_data);
@@ -80,7 +82,7 @@ class CustomersController extends Controller
                 // dd($customers_data->resource->customer_id);
                 return redirect()->route('lead.quotation.view', $customers_data->resource->customer_id);
             } else if ($customers_data->errors) {
-                $data = json_decode($this->get_curl($customers_url . "?id_number=" . request()->id_number));
+                $data = json_decode($this->get_curl($customers_url . "?msisdn=" . request()->msisdn));
                 // dd($data);
                 $customer_id = $data->results[0]->customer_id;
                 return redirect()->route('lead.quotation.view', $customer_id);
