@@ -50,6 +50,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url('calculator') }}">
+                            <i class="nc-icon nc-chart-bar-32"></i>
+                            <p>Calculator</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url('customers_covers') }}">
                             <i class="nc-icon nc-align-center"></i>
                             <p>Covers</p>
@@ -69,8 +75,8 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('categories') }}">
-                            <i class="nc-icon nc-grid-45"></i>
-                            <p>Underwriter</p>
+                            <i class="nc-icon nc-align-center"></i>
+                            <p>Underwriters</p>
                         </a>
                     </li>
                     <li class="nav-item">

@@ -87,7 +87,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="cover_id btn btn-info btn-secondary">Pay</button>
+                            {{-- <button type="button" class="cover_id btn btn-info btn-secondary">Pay</button> --}}
+                            <button type="button" class="cover_id btn btn-info btn-secondary">Notify Customer</button>
                         </div>
                     </div>
                 </div>

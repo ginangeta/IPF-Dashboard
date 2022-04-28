@@ -93,6 +93,7 @@ class CustomersController extends Controller
             'last_name' => 'required',
             'id_number' => 'required',
             'msisdn' => 'required',
+            'pin_number' => 'required',
         ]);
 
         $data = [
@@ -102,6 +103,7 @@ class CustomersController extends Controller
             'last_name' => request()->last_name,
             'id_number' => request()->id_number,
             'msisdn' => request()->msisdn,
+            'pin_number' => request()->pin_number,
         ];
 
         // dd($data);

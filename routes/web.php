@@ -33,6 +33,8 @@ Route::get('/home', [SiteController::class, 'home'])->name('home');
 Route::get('/profile', [SiteController::class, 'profile'])->name('profile');
 Route::get('/application', [SiteController::class, 'application'])->name('application');
 Route::post('/application', [SiteController::class, 'submitApplication'])->name('application');
+Route::get('/calculator', [SiteController::class, 'getCalculator'])->name('lead.calculator');
+Route::post('/calculate', [SiteController::class, 'Calculate'])->name('lead.calculate');
 
 Route::get('/points', [CustomersController::class, 'calPoints'])->name('calPoints');
 Route::post('/customers', [CustomersController::class, 'storeCustomers'])->name('store.customers');

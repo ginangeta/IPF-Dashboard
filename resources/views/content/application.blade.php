@@ -60,6 +60,14 @@
 
                                         <div class="col-md-4 col-sm-12">
                                             <div class="form-group">
+                                                <label>KRA Pin Number</label>
+                                                <input type="number" class="form-control" name="pin_number"
+                                                    aria-describedby="plateHelp" required placeholder="Enter Pin Number">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="form-group">
                                                 <label>Customer's Email</label>
                                                 <input type="email" class="form-control" name="email_address"
                                                     aria-describedby="plateHelp" required placeholder="Enter Email Address"

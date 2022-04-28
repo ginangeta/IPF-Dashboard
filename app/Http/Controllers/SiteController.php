@@ -75,6 +75,57 @@ class SiteController extends Controller
         }
     }
 
+    public function getCalculator()
+    {
+        $this->url = config('urls.url');
+
+        $offers_url = $this->url . 'offers?page_size=100';
+        $offers_response = $this->get_curl($offers_url);
+        $offers_data = json_decode($offers_response);
+
+        $products_url = $this->url . 'products?page_size=100';
+        $products_response = $this->get_curl($products_url);
+        $products_data = json_decode($products_response);
+
+        $categories_url = $this->url . 'categories?page_size=100';
+        $categories_response = $this->get_curl($categories_url);
+        $categories_data = json_decode($categories_response);
+
+        // dd($offers_data);
+
+        if (isset($offers_data->code)) {
+            return redirect()->route('signin');
+        } else {
+            return view('content.calculator', [
+                'offers' => $offers_data->results,
+                'categories' => $categories_data->results,
+                'products' => $products_data->results
+            ]);
+        }
+    }
+
+    public function Calculate()
+    {
+        $this->url = config('urls.no_auth_url');
+        $url = $this->url . 'offers/quotation';
+        $end_date = null;
+
+        $offers_url = $this->url . 'offers?product_id=' . request()->product_id . '&category_id=' . request()->category_id;
+        $offers_response = $this->get_curl($offers_url);
+        $offers_data = json_decode($offers_response);
+
+        // dd($url, "http://ipfx-api.wrightinteractives.com/api/offers/quotation");
+        $quote_data = [
+            "offer_id" => $offers_data->results[0]->offer_id,
+            "premium" => request()->vehicle_premium
+        ];
+
+        $response = $this->to_curl($url, $quote_data);
+        $data = json_decode($response);
+
+        return response()->json($data);
+    }
+
     public function submitApplication()
     {
         // dd(request()->all());
