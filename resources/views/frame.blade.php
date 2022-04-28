@@ -80,6 +80,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url('organisations') }}">
+                            <i class="nc-icon nc-bank"></i>
+                            <p>Organizations</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url('offers') }}">
                             <i class="nc-icon nc-preferences-circle-rotate"></i>
                             <p>Offers</p>

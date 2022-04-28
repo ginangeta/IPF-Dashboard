@@ -9,6 +9,7 @@ use App\Http\Controllers\OffersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\OrganizationsController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -35,6 +36,7 @@ Route::post('/application', [SiteController::class, 'submitApplication'])->name(
 
 Route::get('/points', [CustomersController::class, 'calPoints'])->name('calPoints');
 Route::post('/customers', [CustomersController::class, 'storeCustomers'])->name('store.customers');
+Route::post('/edit_customer', [CustomersController::class, 'editCustomer'])->name('edit.customer');
 Route::get('/customers', [CustomersController::class, 'getCustomers'])->name('customers');
 Route::post('/storeLead', [CustomersController::class, 'storeCustomerLeads'])->name('storeLead');
 // Route::get('/customers_leads/{id}', [CustomersController::class, 'getCustomerLeadView'])->name('leads.view');
@@ -68,6 +70,10 @@ Route::get('/message_template/{id}', [MessagesController::class, 'getMessagesTem
 Route::get('/offers', [OffersController::class, 'getOffers'])->name('offers');
 Route::post('/offers', [OffersController::class, 'storeOffer'])->name('offers');
 Route::post('/edit_offers', [OffersController::class, 'editOffer'])->name('edit.offer');
+
+Route::get('/organisations', [OrganizationsController::class, 'getOrganizations'])->name('organisations');
+Route::post('/organisations', [OrganizationsController::class, 'storeOrganization'])->name('organisations');
+Route::post('/edit_organisations', [OrganizationsController::class, 'editOrganization'])->name('edit.organisation');
 
 Route::get('/users', [UsersController::class, 'getUsers'])->name('users');
 Route::post('/users', [UsersController::class, 'storeUser'])->name('users');

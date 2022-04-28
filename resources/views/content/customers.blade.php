@@ -105,6 +105,7 @@
                                     <th>Pin</th>
                                     <th>Created By</th>
                                     <th>Created At</th>
+                                    <th>Actions</th>
                                 </thead>
                                 <tbody>
                                     <form method="POST" id="sendMessageForm" action="{{ url('sendMessage') }}">
@@ -124,8 +125,20 @@
                                                 <td>{{ $customer->email_address }}</td>
                                                 <td>{{ $customer->pin_number }}</td>
                                                 <td>{{ $customer->registered_by_msisdn }}</td>
-                                                <td>{{ date("Y-m-d H:i:s",$customer->date_time_added) }}
+                                                <td>
+                                                    {{ date('Y-m-d H:i:s', $customer->date_time_added) }}
                                                 </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
+                                                        data-target="#details{{ $customer->customer_id }}"><i
+                                                            class="zmdi zmdi-eye"></i>Details</button>
+                                                    <button type="button" class="btn btn-warning btn-sm ml-2" data-toggle="modal"
+                                                        data-target="#edit{{ $customer->customer_id }}"><i
+                                                            class="zmdi zmdi-edit"></i>Edit</button>
+                                                </td>
+                                                {{-- Modals --}}
+                                                @include('content.includes.customers.customer_details')
+                                                @include('content.includes.customers.edit_customer')
                                             </tr>
                                         @endforeach
                                     </form>

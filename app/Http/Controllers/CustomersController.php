@@ -18,6 +18,8 @@ class CustomersController extends Controller
         $customers_response = $this->get_curl($customers_url);
         $customers_data = json_decode($customers_response);
 
+        // dd($customers_data);
+
         $this->url = config('urls.message');
         $templates_url = $this->url . 'templates??page_size=100';
         $templates_response = $this->get_curl($templates_url);
@@ -89,6 +91,50 @@ class CustomersController extends Controller
             } else {
                 return Redirect::back()->withErrors(['There is a technical error encountered, Please try again ']);
             }
+        }
+    }
+
+    public function editCustomer()
+    {
+        // dd(request()->all());
+        $this->url = config('urls.url');
+        $customers_url = $this->url . 'customers/' . (int)request('customer_id');
+        // dd($url, Session::get('token'));
+
+        $data = request()->validate([
+            'customer_id' => ['required'],
+            'record_version' => ['required'],
+            'email_address' => ['required'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'id_number' => ['required'],
+            'customer_status' => ['required'],
+            'msisdn' => ['required'],
+        ]);
+
+        $data = [
+            'customer_id' => (int)request('customer_id'),
+            'customer_status' => request()->customer_status,
+            'email_address' => request()->email_address,
+            'first_name' => request()->first_name,
+            'last_name' => request()->last_name,
+            'id_number' => request()->id_number,
+            'pin_number' => request()->pin_number,
+            'msisdn' => request()->msisdn,
+            "record_version" => (int)request('record_version')
+        ];
+
+        // dd(json_encode($data));
+        $response = $this->put_curl($customers_url, $data);
+        // dd($response);
+
+        $data = json_decode($response);
+
+        // dd($data);
+        if ($data->response_code == 200) {
+            return Redirect::back();
+        } else {
+            return Redirect::back()->withErrors($data->errors[0]->message);
         }
     }
 
