@@ -37,7 +37,7 @@
                                         <strong>KES <span class="premium_payable"></span></strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
-                                        <span>Instalment : </span>
+                                        <span>Installment : </span>
                                         <strong>KES <span class="premium_installment"></span></strong>
                                     </li>
                                 </ul>
@@ -72,6 +72,27 @@
                             <input type="hidden" name="customer_id" value="{{ @$customers->customer_id }}">
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
+                                    <label for="vehicle">Underwriter</label>
+                                    <select class="form-control" name="category_id">
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->category_id }}">
+                                                {{ $category->category }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <label for="vehicle">Product</label>
+                                <select class="form-control" name="product_id">
+                                    @foreach ($products as $product)
+                                        <option value="{{ $product->product_id }}">{{ $product->product_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
                                     <label for="plate_number">Vehicle Plate Number</label>
                                     <input type="text" class="form-control" name="plate_number"
                                         aria-describedby="plateHelp" placeholder="Enter Plate Number"
@@ -93,24 +114,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="vehicle">Categories</label>
-                                    <select class="form-control" name="category_id">
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->category_id }}">
-                                                {{ $category->category }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <label for="vehicle">Product</label>
-                                <select class="form-control" name="product_id">
-                                    @foreach ($products as $product)
-                                        <option value="{{ $product->product_id }}">{{ $product->product_name }}
-                                        </option>
-                                    @endforeach
+                                <label for="vehicle">Tenor</label>
+                                <select class="form-control" name="tenor">
+                                    <option value="annually"> Annual
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-md-4 col-sm-12">
@@ -119,7 +126,7 @@
                                     <input type="date" name="start_date" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-12">
+                            <div class="col-md-4 col-sm-12 d-none">
                                 <div class="form-group">
                                     <label for="vehicle">End Date</label>
                                     <input type="date" name="end_date" class="form-control">
@@ -152,6 +159,7 @@
             var plate_number = $('input[name=plate_number]').val();
             var start_date = $('input[name=start_date]').val();
             var end_date = $('input[name=end_date]').val();
+            var tenor = $('select[name=tenor]').val();
             var value = $('input[name=value]').val();
 
 
@@ -172,6 +180,7 @@
                 start_date: start_date,
                 end_date: end_date,
                 value: value,
+                tenor: tenor,
 
             }).done(function(data) {
                 console.log("ResponseText:" + data);

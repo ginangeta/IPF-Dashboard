@@ -70,7 +70,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('categories') }}">
                             <i class="nc-icon nc-grid-45"></i>
-                            <p>Categories</p>
+                            <p>Underwriter</p>
                         </a>
                     </li>
                     <li class="nav-item">

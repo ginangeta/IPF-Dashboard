@@ -66,4 +66,45 @@ class CategoriesController extends Controller
             return Redirect::back()->withErrors($data->errors[0]->message);
         }
     }
+
+
+    public function editCategories()
+    {
+        // dd(request()->all());
+        $this->url = config('urls.url');
+        $url = $this->url . 'categories/' . request('category_id');
+
+        // dd($url);
+        $data = request()->validate([
+            "category_id" => ['required'],
+            "brief" => ['required'],
+            "category" => ['required'],
+            "category_status" => ['required'],
+            "record_version" => ['required'],
+        ]);
+
+        $data = [
+            "category_id" => (int)request()->category_id,
+            "brief" => request()->brief,
+            "category" => request()->category_name,
+            "category_status" => request()->category_status,
+            "record_version" => (int)request()->record_version,
+            "company_id" => 1
+        ];
+
+        // dd($data);
+
+        $response = $this->put_curl($url, $data);
+        $data = json_decode($response);
+
+        // dd($data);
+        // $status = $data->code;
+        // $message = $data->message;
+
+        if ($data->response_code == 200) {
+            return Redirect::back();
+        } else {
+            return Redirect::back()->withErrors($data->errors[0]->message);
+        }
+    }
 }

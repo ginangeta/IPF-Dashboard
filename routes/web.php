@@ -38,6 +38,7 @@ Route::get('/points', [CustomersController::class, 'calPoints'])->name('calPoint
 Route::post('/customers', [CustomersController::class, 'storeCustomers'])->name('store.customers');
 Route::post('/edit_customer', [CustomersController::class, 'editCustomer'])->name('edit.customer');
 Route::get('/customers', [CustomersController::class, 'getCustomers'])->name('customers');
+Route::get('/customers/{id}', [CustomersController::class, 'getCustomer'])->name('customer');
 Route::post('/storeLead', [CustomersController::class, 'storeCustomerLeads'])->name('storeLead');
 // Route::get('/customers_leads/{id}', [CustomersController::class, 'getCustomerLeadView'])->name('leads.view');
 Route::get('/lead_application/{id}', [CustomersController::class, 'getCustomerLeadApplicationView'])->name('lead.application');
@@ -51,12 +52,14 @@ Route::post('/application_payment', [CustomersController::class, 'submitApplicat
 
 Route::get('/customers_covers', [CustomersController::class, 'getCustomerCovers'])->name('customers.covers');
 Route::get('/customers_cover/{id}', [CustomersController::class, 'getCustomerCovers'])->name('customers.cover');
+Route::post('/customers_cover/{id}', [CustomersController::class, 'editCustomerCovers'])->name('edit.cover');
 
 Route::get('/customers_payments', [CustomersController::class, 'getCustomerPayments'])->name('customers.payments');
 Route::get('/customers_payments/{id}', [CustomersController::class, 'getCustomerPayments'])->name('customers.payment');
 
 Route::get('/categories', [CategoriesController::class, 'getCategories'])->name('categories');
 Route::post('/categories', [CategoriesController::class, 'storeCategories'])->name('categories');
+Route::post('/edit_category/{id}', [CategoriesController::class, 'editCategories'])->name('edit.category');
 
 Route::get('/products', [ProductsController::class, 'getProducts'])->name('products');
 Route::post('/products', [ProductsController::class, 'storeProduct'])->name('products');

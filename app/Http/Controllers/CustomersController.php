@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -15,6 +16,41 @@ class CustomersController extends Controller
     {
         $this->url = config('urls.url');
         $customers_url = $this->url . 'customers?page_size=100';
+        $customers_response = $this->get_curl($customers_url);
+        $customers_data = json_decode($customers_response);
+
+        // dd($customers_data);
+
+        $this->url = config('urls.message');
+        $templates_url = $this->url . 'templates??page_size=100';
+        $templates_response = $this->get_curl($templates_url);
+        $templates_data = json_decode($templates_response);
+
+        $channels_url = $this->url . 'channels??page_size=100';
+        $channels_response = $this->get_curl($channels_url);
+        $channels_data = json_decode($channels_response);
+
+        // dd($customers_data);
+
+        if (isset($customers_data->code)) {
+            return redirect()->route('signin');
+        } else {
+            if ($customers_data->response_code == "403" || $templates_data->response_code == "403") {
+                return Redirect::back()->withErrors(['You do not have permissions to view this page']);
+            } else {
+                return view('content.customers', [
+                    'customers' => $customers_data->results,
+                    'templates' => $templates_data->results,
+                    'channels' => $channels_data->results,
+                ]);
+            }
+        }
+    }
+
+    public function getCustomer($id)
+    {
+        $this->url = config('urls.url');
+        $customers_url = $this->url . 'customers?customer_id=' . $id;
         $customers_response = $this->get_curl($customers_url);
         $customers_data = json_decode($customers_response);
 
@@ -317,7 +353,11 @@ class CustomersController extends Controller
     public function getCustomerCovers($id = null)
     {
         $this->url = config('urls.url');
-        $customers_url = $this->url . 'customer_covers?page_size=100';
+        if ($id) {
+            $customers_url = $this->url . 'customer_covers?customer_id=' . $id . "&page_size=100";
+        } else {
+            $customers_url = $this->url . 'customer_covers?page_size=100';
+        }
         $customers_response = $this->get_curl($customers_url);
         $customers_data = json_decode($customers_response);
 
@@ -330,6 +370,51 @@ class CustomersController extends Controller
         }
     }
 
+    public function editCustomerCovers()
+    {
+        // dd(request()->all());
+        $this->url = config('urls.url');
+        $customers_url = $this->url . 'customer_covers/' . (int)request('customer_cover_id');
+        // dd($url, Session::get('token'));
+
+        $data = request()->validate([
+            "customer_cover_id" => ['required'],
+            "car_reg_number" => ['required'],
+            "premium" => ['required'],
+            "deposit" => ['required'],
+            "installment" => ['required'],
+            "loan" => ['required'],
+            "interest_rate" => ['required'],
+            "customer_cover_status" => ['required'],
+            "record_version" => ['required'],
+
+        ]);
+
+
+        $data = [
+            "customer_cover_id" => (int)request('customer_cover_id'),
+            "car_reg_number" => request('car_reg_number'),
+            "premium" => (int)request('premium'),
+            "deposit" => (int)request('deposit'),
+            "installment" => (int)request('installment'),
+            "loan" => (int)request('loan'),
+            "interest_rate" => (int)request('interest_rate'),
+            "record_version" => (int)request('record_version'),
+        ];
+
+        // dd(json_encode($data));
+        $response = $this->put_curl($customers_url, $data);
+        // dd($response);
+
+        $data = json_decode($response);
+
+        // dd($data);
+        if ($data->response_code == 200) {
+            return Redirect::back();
+        } else {
+            return Redirect::back()->withErrors($data->errors[0]->message);
+        }
+    }
     public function getCustomerPayments($id = null)
     {
         $this->url = config('urls.url');
@@ -351,6 +436,7 @@ class CustomersController extends Controller
 
         $this->url = config('urls.no_auth_url');
         $url = $this->url . 'offers/quotation';
+        $end_date = null;
 
         $offers_url = $this->url . 'offers?product_id=' . request()->product_id . '&category_id=' . request()->category_id;
         $offers_response = $this->get_curl($offers_url);
@@ -365,12 +451,16 @@ class CustomersController extends Controller
         $response = $this->to_curl($url, $quote_data);
         // dd($url, $quote_data, $response);
         $data = json_decode($response);
+        if (request('tenor') == "annually") {
+            $end_date = Carbon::parse(request('start_date'))->addYear();
+            $end_date = Carbon::parse($end_date)->format('d/m/y');
+        }
         // dd($data);
         $quotation_data = (object)[
             'customer_id' => request()->customer_id,
             'dates' => (object)[
-                'start_date' => request()->start_date,
-                'end_date' => request()->end_date
+                'start_date' => Carbon::parse(request()->start_date)->format('d/m/y'),
+                'end_date' => $end_date
             ],
             'data' => $data,
             'plate_number' =>  Str::upper(request()->plate_number),
@@ -378,6 +468,8 @@ class CustomersController extends Controller
             "offer_id" => $offers_data->results[0]->offer_id,
             "car_value" => request()->value,
         ];
+
+        // dd($quotation_data);
         Session::put('quotation_' . request()->customer_id, $quotation_data);
         return response()->json($data);
     }

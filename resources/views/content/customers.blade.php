@@ -115,7 +115,7 @@
                                                     <input type="checkbox" value="{{ $customer->msisdn }}"
                                                         class="form-control customers-checkbox" name="contacts">
                                                 </td>
-                                                <td><a href="{{ route('lead.quotation.view', $customer->customer_id) }}">
+                                                <td><a href="{{ route('customers.cover', $customer->customer_id ) }}">
                                                         {{ $customer->first_name . ' ' . $customer->last_name }}
                                                     </a>
                                                 </td>
@@ -129,10 +129,16 @@
                                                     {{ date('Y-m-d H:i:s', $customer->date_time_added) }}
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
+                                                    <a href="{{ route('lead.quotation.view', $customer->customer_id) }}"
+                                                        class="btn btn-success btn-sm ml-2">
+                                                        Quote
+                                                    </a>
+                                                    <button type="button" class="btn btn-info btn-sm ml-2"
+                                                        data-toggle="modal"
                                                         data-target="#details{{ $customer->customer_id }}"><i
                                                             class="zmdi zmdi-eye"></i>Details</button>
-                                                    <button type="button" class="btn btn-warning btn-sm ml-2" data-toggle="modal"
+                                                    <button type="button" class="btn btn-warning btn-sm ml-2"
+                                                        data-toggle="modal"
                                                         data-target="#edit{{ $customer->customer_id }}"><i
                                                             class="zmdi zmdi-edit"></i>Edit</button>
                                                 </td>

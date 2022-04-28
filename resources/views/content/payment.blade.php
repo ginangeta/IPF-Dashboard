@@ -1,6 +1,6 @@
 @extends('frame')
 @section('title')
-    Customers Covers
+    Customers Cover Payment
 @endsection
 @section('content')
     <div class="container-fluid">
