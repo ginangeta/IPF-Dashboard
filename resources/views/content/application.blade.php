@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="d-sm-none d-md-flex col-md-4">
+                            <div class="d-sm-none d-md-flex col-md-4 justify-content-center align-items-center">
                                 <img src="{{ url('img/insurance.jpg') }}" alt="logo" class="form-img">
                             </div>
                             <div class="col-md-8 col-sm-12">
@@ -42,7 +42,7 @@
                                                     style="text-transform:capitalize">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-sm-12">
+                                        <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
                                                 <input type="number" class="form-control" name="msisdn"
@@ -50,7 +50,7 @@
                                                     placeholder="Enter Phone Number (254xxxxxxxxx)">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-sm-12">
+                                        <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>Id Number</label>
                                                 <input type="number" class="form-control" name="id_number"
@@ -58,7 +58,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4 col-sm-12">
+                                        <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>KRA Pin Number</label>
                                                 <input type="number" class="form-control" name="pin_number"
@@ -66,7 +66,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4 col-sm-12">
+                                        <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>Customer's Email</label>
                                                 <input type="email" class="form-control" name="email_address"
