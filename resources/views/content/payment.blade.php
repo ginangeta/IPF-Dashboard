@@ -68,13 +68,13 @@
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Start Date : </span>
                                 <strong>
-                                    <span>{{ date('Y-m-d H:i a', substr(@$cover[0]->start_date, 0, -3)) }}</span>
+                                    <span>{{ date('Y-m-d H:i a', @$cover[0]->start_date / 1000) }}</span>
                                 </strong>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>End Date : </span>
                                 <strong>
-                                    <span>{{ date('Y-m-d H:i a', substr(@$cover[0]->end_date, 0, -3)) }}</span>
+                                    <span>{{ date('Y-m-d H:i a', @$cover[0]->end_date / 1000) }}</span>
                                 </strong>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
@@ -88,7 +88,7 @@
                     <div class="card-footer">
                         <div class="d-flex justify-content-end">
                             {{-- <button type="button" class="cover_id btn btn-info btn-secondary">Pay</button> --}}
-                            <button type="button" class="cover_id btn btn-info btn-secondary">Notify Customer</button>
+                            <button type="button" class="notify_id btn btn-info btn-secondary">Notify Customer</button>
                         </div>
                     </div>
                 </div>
@@ -220,6 +220,15 @@
             $('.cover_id').on('click', function() {
                 $('#payment_options').modal('show');
                 cover_id = $(this).html();
+            });
+
+            $('.notify_id').on('click', function() {
+                toastr.success("Customer Notification Sent. Redirecting...");
+
+                setTimeout(() => {
+                    window.location.replace("{{ route('customers.covers') }}");
+                }, 3000);
+
             });
 
 

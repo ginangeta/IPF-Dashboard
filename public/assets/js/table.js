@@ -34,6 +34,8 @@ $(window).on("load", function () {
     }
 }), $("#dropzone-upload")[0] && (Dropzone.autoDiscover = !1), $(document).ready(function () {
     if ($("#data-table")[0]) {
+        var indexLastColumn = $("#data-table").find('tr')[0].cells.length - 2;
+
         $("#data-table").DataTable({
             autoWidth: !1,
             responsive: !0,
@@ -41,6 +43,7 @@ $(window).on("load", function () {
                 [15, 30, 45, -1],
                 ["15 Rows", "30 Rows", "45 Rows", "Everything"]
             ],
+            order: [[indexLastColumn, 'desc']],
             language: {
                 searchPlaceholder: "Search for records..."
             },

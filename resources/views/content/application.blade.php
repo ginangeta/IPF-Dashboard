@@ -46,14 +46,14 @@
                                             <div class="form-group">
                                                 <label>Phone Number</label>
                                                 <input type="number" class="form-control" name="msisdn"
-                                                    aria-describedby="plateHelp" required
-                                                    placeholder="Enter Phone Number (254xxxxxxxxx)">
+                                                    aria-describedby="plateHelp" required min="10" max="10"
+                                                    placeholder="Enter Phone Number (07xxxxxxxxx)">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>Id Number</label>
-                                                <input type="number" class="form-control" name="id_number"
+                                                <input type="number" class="form-control" name="id_number" min="8" max="8"
                                                     aria-describedby="plateHelp" required placeholder="Enter Id Number">
                                             </div>
                                         </div>
@@ -61,8 +61,9 @@
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>KRA Pin Number</label>
-                                                <input type="number" class="form-control" name="pin_number"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Pin Number">
+                                                <input type="text" class="form-control" name="pin_number"
+                                                    style="text-transform: uppercase;" aria-describedby="plateHelp" required
+                                                    placeholder="Enter Pin Number">
                                             </div>
                                         </div>
 

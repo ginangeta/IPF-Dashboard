@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
-                                <label for="vehicle">Tenor</label>
+                                <label for="vehicle">IPF Term</label>
                                 <select class="form-control" name="tenor">
                                     <option value="annually"> Annual
                                     </option>
@@ -122,7 +122,7 @@
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label for="vehicle">Start Date</label>
+                                    <label for="vehicle">Policy Start Date</label>
                                     <input type="date" name="start_date" class="form-control">
                                 </div>
                             </div>

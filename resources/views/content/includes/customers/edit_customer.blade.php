@@ -42,7 +42,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Customer ID</label>
-                                <input type="text" class="form-control" name="id_number"
+                                <input type="text" class="form-control" name="id_number" min="8" max="8"
                                     value="{{ $customer->id_number }}" aria-describedby="plateHelp" required
                                     placeholder="Enter Customer ID">
                             </div>
@@ -59,7 +59,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Customer Phone</label>
-                                <input type="text" class="form-control" name="msisdn"
+                                <input type="text" class="form-control" name="msisdn" min="10" max="10"
                                     value="{{ $customer->msisdn }}" aria-describedby="plateHelp" required
                                     placeholder="Enter Customer Phone">
                             </div>

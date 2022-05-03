@@ -1,6 +1,10 @@
 @extends('frame')
 @section('title')
-    Customers Covers
+    @if ($single)
+        Customers Covers for Customer Number {{ $single ?? '' }}
+    @else
+        Customers Covers
+    @endif
 @endsection
 @section('content')
     <style>
@@ -77,52 +81,66 @@
                                     <th>Cover Type</th>
                                     <th>Car Reg Number</th>
                                     <th>Policy Number</th>
-                                    <th>Car Use Type</th>
                                     <th>Car Value</th>
+                                    <th>Loan Amount</th>
                                     <th>Policy Premium</th>
+                                    <th>Policy Deposit</th>
+                                    <th>Installment</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Created At</th>
                                     <th>Actions</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($customers as $customer)
+                                    @if ($customers)
+                                        @foreach ($customers as $customer)
+                                            <tr>
+                                                <td><a href="{{ route('lead.payment', $customer->customer_cover_id) }}">
+                                                        {{ $customer->customer_cover_id }}
+                                                    </a>
+                                                </td>
+                                                <td>{{ $customer->customer_cover_status }}</td>
+                                                <td>{{ $customer->cover_type }}</td>
+                                                <td>{{ $customer->car_reg_number }}</td>
+                                                <td>{{ $customer->policy_number }}</td>
+                                                <td>{{ number_format($customer->car_value) }}</td>
+                                                <td>{{ number_format($customer->loan) }}</td>
+                                                <td>{{ number_format($customer->premium) }}</td>
+                                                <td>{{ number_format($customer->deposit) }}</td>
+                                                <td>{{ number_format($customer->installment) }}</td>
+                                                {{-- <td>{{ date('Y-m-d H:i:s', $customer->start_date) }} --}}
+                                                <td>{{ date('Y-m-d H:i:s', $customer->start_date / 1000) }}
+                                                </td>
+                                                <td>{{ date('Y-m-d H:i:s', $customer->end_date / 1000) }}
+                                                </td>
+                                                <td>{{ date('Y-m-d H:i:s', $customer->date_time_added) }}
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info btn-sm ml-2"
+                                                        data-toggle="modal"
+                                                        data-target="#details{{ $customer->customer_cover_id }}"><i
+                                                            class="zmdi zmdi-eye"></i>Details</button>
+                                                    <button type="button" class="btn btn-warning btn-sm ml-2"
+                                                        data-toggle="modal"
+                                                        data-target="#edit{{ $customer->customer_cover_id }}"><i
+                                                            class="zmdi zmdi-edit"></i>Edit</button>
+                                                </td>
+                                                {{-- Modals --}}
+                                                @include(
+                                                    'content.includes.covers.edit_cover'
+                                                )
+                                                @include(
+                                                    'content.includes.covers.cover_details'
+                                                )
+                                            </tr>
+                                        @endforeach
+                                    @else
                                         <tr>
-                                            <td><a href="{{ route('lead.payment', $customer->customer_cover_id) }}">
-                                                    {{ $customer->customer_cover_id }}
-                                                </a>
+                                            <td colspan="14">
+                                                <p class="text-center">no data found</p>
                                             </td>
-                                            <td>{{ $customer->customer_cover_status }}</td>
-                                            <td>{{ $customer->cover_type }}</td>
-                                            <td>{{ $customer->car_reg_number }}</td>
-                                            <td>{{ $customer->policy_number }}</td>
-                                            <td>{{ $customer->use_type }}</td>
-                                            <td>{{ number_format($customer->car_value) }}</td>
-                                            <td>{{ number_format($customer->premium) }}</td>
-                                            <td>{{ date('Y-m-d H:i:s', substr($customer->start_date, 0, -3)) }}
-                                            </td>
-                                            <td>{{ date('Y-m-d H:i:s', substr($customer->end_date, 0, -3)) }}
-                                            </td>
-                                            <td>{{ date('Y-m-d H:i:s', $customer->date_time_added) }}
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                    data-target="#details{{ $customer->customer_cover_id }}"><i
-                                                        class="zmdi zmdi-eye"></i>Details</button>
-                                                <button type="button" class="btn btn-warning btn-sm ml-2"
-                                                    data-toggle="modal"
-                                                    data-target="#edit{{ $customer->customer_cover_id }}"><i
-                                                        class="zmdi zmdi-edit"></i>Edit</button>
-                                            </td>
-                                            {{-- Modals --}}
-                                            @include(
-                                                'content.includes.covers.edit_cover'
-                                            )
-                                            @include(
-                                                'content.includes.covers.cover_details'
-                                            )
                                         </tr>
-                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

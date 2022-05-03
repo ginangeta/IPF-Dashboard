@@ -25,7 +25,11 @@ class SiteController extends Controller
             // dd($data);
 
             if ($data->response_code == 200) {
-                return view('content.dashboard');
+                $customers_url = config('urls.url') . 'customer_covers?page_size=10';
+                $customers_response = $this->get_curl($customers_url);
+                $customers_data = json_decode($customers_response);
+
+                return view('content.dashboard', ['customers' => $customers_data->results]);
             } else {
                 return Redirect::back()->withErrors($data->errors[0]->message);
             }

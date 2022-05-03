@@ -88,7 +88,7 @@ class CustomersController extends Controller
         $customers_url = $this->url . 'customers';
 
         request()->validate([
-            'email_address' => 'required',
+            'email_address' => ['required', 'email:rfc,dns'],
             'first_name' => 'required',
             'last_name' => 'required',
             'id_number' => 'required',
@@ -98,12 +98,12 @@ class CustomersController extends Controller
 
         $data = [
             'customer_status' => 'ACTIVE',
-            'email_address' => request()->email_address,
+            'email_address' => Str::lower(request()->email_address),
             'first_name' => request()->first_name,
             'last_name' => request()->last_name,
             'id_number' => request()->id_number,
             'msisdn' => request()->msisdn,
-            'pin_number' => request()->pin_number,
+            'pin_number' => Str::upper(request()->pin_number),
         ];
 
         // dd($data);
@@ -142,7 +142,7 @@ class CustomersController extends Controller
         $data = request()->validate([
             'customer_id' => ['required'],
             'record_version' => ['required'],
-            'email_address' => ['required'],
+            'email_address' => ['required', 'email:rfc,dns'],
             'first_name' => ['required'],
             'last_name' => ['required'],
             'id_number' => ['required'],
@@ -153,11 +153,11 @@ class CustomersController extends Controller
         $data = [
             'customer_id' => (int)request('customer_id'),
             'customer_status' => request()->customer_status,
-            'email_address' => request()->email_address,
+            'email_address' => Str::lower(request()->email_address),
             'first_name' => request()->first_name,
             'last_name' => request()->last_name,
             'id_number' => request()->id_number,
-            'pin_number' => request()->pin_number,
+            'pin_number' => Str::upper(request()->pin_number),
             'msisdn' => request()->msisdn,
             "record_version" => (int)request('record_version')
         ];
@@ -242,7 +242,7 @@ class CustomersController extends Controller
             "start_date" => strtotime(request()->start_date),
             "tenure" => (int)request()->tenure,
             "use_type" => request()->use_type,
-            "car_value" => request()->car_value,
+            "car_value" => (int)request()->car_value,
             "chassis_number" => request()->chassisNumber,
             "yearOfManufacture" => request()->year_of_manufacture,
             "yearOfRegistration" => request()->year_of_registration,
@@ -355,7 +355,9 @@ class CustomersController extends Controller
     public function getCustomerCovers($id = null)
     {
         $this->url = config('urls.url');
+        $single = null;
         if ($id) {
+            $single = $id;
             $customers_url = $this->url . 'customer_covers?customer_id=' . $id . "&page_size=100";
         } else {
             $customers_url = $this->url . 'customer_covers?page_size=100';
@@ -368,7 +370,10 @@ class CustomersController extends Controller
         if (isset($customers_data->code)) {
             return redirect()->route('signin');
         } else {
-            return view('content.customer_covers', ['customers' => $customers_data->results]);
+            return view('content.customer_covers', [
+                'customers' => $customers_data->results,
+                'single' => $single
+            ]);
         }
     }
 

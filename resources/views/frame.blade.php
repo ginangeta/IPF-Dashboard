@@ -75,7 +75,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('categories') }}">
-                            <i class="nc-icon nc-align-center"></i>
+                            <i class="nc-icon nc-puzzle-10"></i>
                             <p>Underwriters</p>
                         </a>
                     </li>
@@ -97,7 +97,7 @@
                             <p>Offers</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item d-none">
                         <a class="nav-link" href="{{ url('message_template') }}">
                             <i class="nc-icon nc-layers-3"></i>
                             <p>Templates</p>
@@ -109,7 +109,7 @@
                             <p>Messages</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item d-none">
                         <a class="nav-link" href="{{ url('users') }}">
                             <i class="nc-icon nc-bullet-list-67"></i>
                             <p>Users</p>

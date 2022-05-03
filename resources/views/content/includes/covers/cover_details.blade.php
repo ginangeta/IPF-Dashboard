@@ -16,6 +16,10 @@
                         <p>{{ $customer->customer_cover_status }}</p>
                         <hr>
 
+                        <h6><strong>Car Value</strong></h6>
+                        <p>{{ number_format($customer->car_value) }}</p>
+                        <hr>
+
                         <h6><strong>Premium</strong></h6>
                         <p>{{ number_format($customer->premium) }}</p>
                         <hr>
@@ -40,13 +44,13 @@
                     <div class="col-md-6 col-sm-12">
                         <h6><strong>Start Date</strong></h6>
                         <small class="mb-0">
-                            {{ date('Y-m-d H:i:s', substr($customer->start_date, 0, -3)) }}
+                            {{ date('Y-m-d H:i:s', $customer->start_date / 1000) }}
                         </small>
                         <hr>
 
                         <h6><strong>End Date</strong></h6>
                         <small class="mb-0">
-                            {{ date('Y-m-d H:i:s', substr($customer->end_date, 0, -3)) }}
+                            {{ date('Y-m-d H:i:s', $customer->end_date / 1000) }}
                         </small>
                         <hr>
 

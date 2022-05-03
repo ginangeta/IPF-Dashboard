@@ -1,6 +1,6 @@
 @extends('frame')
 @section('title')
-    Application
+    Lead Application
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -47,7 +47,7 @@
                                             placeholder="Enter Deposit Amount">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-4 col-sm-12 d-none">
                                     <div class="form-group">
                                         <label>Lead Status</label>
                                         <select name="customer_lead_status" class="form-control"
