@@ -124,8 +124,9 @@ class CustomersController extends Controller
             } else if ($customers_data->errors) {
                 $data = json_decode($this->get_curl($customers_url . "?msisdn=" . request()->msisdn));
                 // dd($data);
-                $customer_id = $data->results[0]->customer_id;
-                return redirect()->route('lead.quotation.view', $customer_id);
+                // $customer_id = $data->results[0]->customer_id;
+                // return redirect()->route('lead.quotation.view', $customer_id);
+                return Redirect::back()->withErrors(['A customer with either the phone number or id number already exists in the system']);
             } else {
                 return Redirect::back()->withErrors(['There is a technical error encountered, Please try again ']);
             }
