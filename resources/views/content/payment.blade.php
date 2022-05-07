@@ -1,6 +1,6 @@
 @extends('frame')
 @section('title')
-    Customers Cover Payment
+    Customers Cover Confirmation
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -8,17 +8,23 @@
             <div class="col-md-5 col-sm-12 d-sm-none d-md-flex">
                 <div class="card h-100 w-100">
                     <div class="card-header">
-                        <h4 class="card-title">IPF Application Deposit Payment
-                            {{ @$cover[0]->car_reg_number }}
+                        <h4 class="card-title text-center">IPF Application For {{ @$cover[0]->car_reg_number }} Stored
+                            Successfully
                         </h4>
-                        <p class="mb-0">For Loan Amount: {{ @$cover[0]->loan }}</p>
                     </div>
                     <div class="card-body">
                         <img src="{{ url('img/happy_payment.jpg') }}" alt="logo" class="img-fluid mt-4">
                     </div>
+
+                    <p class="text-center">
+                        <small class="p-4">Kindly ensure that customer has received notification of the
+                            successful
+                            registration</small>
+                    </p>
                 </div>
             </div>
             <div class="col-md-7 col-sm-12">
+                {{-- @dd($cover) --}}
                 <div class="card h-100">
                     <div class="card-header">
                         <h4 class="card-title">IPF Application Details
@@ -38,6 +44,12 @@
                                 <span>Car Use : </span>
                                 <strong>
                                     <span>{{ @$cover[0]->use_type }}</span>
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Loan amount : </span>
+                                <strong>
+                                    KES <span>{{ number_format(@$cover[0]->loan) }}</span>
                                 </strong>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
@@ -88,7 +100,7 @@
                     <div class="card-footer">
                         <div class="d-flex justify-content-end">
                             {{-- <button type="button" class="cover_id btn btn-info btn-secondary">Pay</button> --}}
-                            <button type="button" class="notify_id btn btn-info btn-secondary">Notify Customer</button>
+                            <button type="button" class="notify_id btn btn-info btn-secondary">View Customer Covers</button>
                         </div>
                     </div>
                 </div>
@@ -223,10 +235,11 @@
             });
 
             $('.notify_id').on('click', function() {
-                toastr.success("Customer Notification Sent. Redirecting...");
+                toastr.success("Redirecting...");
 
                 setTimeout(() => {
-                    window.location.replace("{{ route('customers.covers') }}");
+                    window.location.replace(
+                        "{{ route('customers.cover', $cover[0]->customer_id) }}");
                 }, 3000);
 
             });

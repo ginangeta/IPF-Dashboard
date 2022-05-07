@@ -136,34 +136,38 @@
                                 <th>Actions</th>
                             </thead>
                             <tbody>
-                                @foreach ($offers as $offer)
-                                    <tr>
-                                        <td>{{ $offer->offer_id }}</td>
-                                        <td>{{ $offer->offer_status }}</td>
-                                        <td>{{ $offer->offer }}</td>
-                                        <td>{{ $offer->tenure }}</td>
-                                        <td>{{ $offer->interest_rate }}</td>
-                                        <td>{{ $offer->deposit_formulae }}</td>
-                                        <td>{{ $offer->installment_formulae }}</td>
-                                        <td>{{ date('Y-m-d H:i:s', $offer->date_time_added) }}
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                data-target="#details{{ $offer->offer_id }}"><i
-                                                    class="zmdi zmdi-eye"></i>Details</button>
-                                            <button type="button" class="btn btn-warning btn-sm ml-2" data-toggle="modal"
-                                                data-target="#edit{{ $offer->offer_id }}"><i
-                                                    class="zmdi zmdi-edit"></i>Edit</button>
-                                        </td>
-                                        {{-- Modals --}}
-                                        @include(
-                                            'content.includes.offers.offer_details'
-                                        )
-                                        @include(
-                                            'content.includes.offers.edit_offer'
-                                        )
-                                    </tr>
-                                @endforeach
+                                @if ($offers)
+                                    @foreach ($offers as $offer)
+                                        <tr>
+                                            <td>{{ $offer->offer_id }}</td>
+                                            <td>{{ $offer->offer_status }}</td>
+                                            <td>{{ $offer->offer }}</td>
+                                            <td>{{ $offer->tenure }}</td>
+                                            <td>{{ $offer->interest_rate }}</td>
+                                            <td>{{ $offer->deposit_formulae }}</td>
+                                            <td>{{ $offer->installment_formulae }}</td>
+                                            <td>{{ date('Y-m-d H:i:s', $offer->date_time_added) }}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
+                                                    data-target="#details{{ $offer->offer_id }}"><i
+                                                        class="zmdi zmdi-eye"></i>Details</button>
+                                                <button type="button" class="btn btn-warning btn-sm ml-2"
+                                                    data-toggle="modal" data-target="#edit{{ $offer->offer_id }}"><i
+                                                        class="zmdi zmdi-edit"></i>Edit</button>
+                                            </td>
+                                            {{-- Modals --}}
+                                            @include(
+                                                'content.includes.offers.offer_details'
+                                            )
+                                            @include(
+                                                'content.includes.offers.edit_offer'
+                                            )
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <td colspan="9" class="text-center">No data available in table</td>
+                                @endif
                             </tbody>
                         </table>
                     </div>

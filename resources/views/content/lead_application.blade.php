@@ -59,10 +59,32 @@
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
+                                        <label>Car Make</label>
+                                        <input type="text" class="form-control" name="car_make" placeholder="Mazda">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Car Model</label>
+                                        <input type="text" class="form-control" name="car_model"
+                                            placeholder="Axela, Atenxa, Demio etc">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
                                         <label>Car Use</label>
                                         <select name="use_type" class="form-control" id="use_type">
                                             <option value="PRIVATE">Private</option>
                                             <option value="PSV">Psv</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Cover Type</label>
+                                        <select name="cover_type" class="form-control" id="cover_type">
+                                            <option value="COMPREHENSIVE">Comprehensive</option>
+                                            <option value="THIRDPARTY">Third Party</option>
                                         </select>
                                     </div>
                                 </div>
@@ -81,7 +103,7 @@
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label>Chasis Number</label>
-                                        <input type="text" class="form-control" name="chassisNumber">
+                                        <input type="text" class="form-control" name="chassis_number">
                                     </div>
                                 </div>
                             </div>

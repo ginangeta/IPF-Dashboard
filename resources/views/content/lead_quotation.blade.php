@@ -102,14 +102,14 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="vehicle">Vehicle Value</label>
-                                    <input type="number" class="form-control" name="value"
+                                    <input type="text" class="form-control number-input" name="value"
                                         placeholder="Enter Vehicle's Estimated Value">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="vehicle">Vehicle Premium</label>
-                                    <input type="number" class="form-control" name="vehicle_premium"
+                                    <input type="text" class="form-control number-input" name="vehicle_premium"
                                         placeholder="Enter Vehicle's Premium">
                                 </div>
                             </div>
@@ -152,6 +152,9 @@
             $('#progress_modal').modal('show');
 
             var vehicle_premium = $('input[name=vehicle_premium]').val();
+            vehicle_premium = vehicle_premium.replace(",", "");
+            var value = $('input[name=value]').val();
+            value = value.replace(new RegExp(",", "g"), "");
             var product_id = $('select[name=product_id]').val();
             var category_id = $('select[name=category_id]').val();
             var customer_id = `{{ @$customers->customer_id }}`;
@@ -160,7 +163,6 @@
             var start_date = $('input[name=start_date]').val();
             var end_date = $('input[name=end_date]').val();
             var tenor = $('select[name=tenor]').val();
-            var value = $('input[name=value]').val();
 
 
             $.ajaxSetup({
@@ -186,11 +188,11 @@
                 console.log("ResponseText:" + data);
                 if (data) {
                     var deposit_amount = data.deposit;
-                    $('.premium_value').html(vehicle_premium);
-                    $('.premium_deposit').html(data.deposit);
-                    $('.premium_facility_fee').html(data.cost);
-                    $('.premium_payable').html(data.total);
-                    $('.premium_installment').html(data.installment);
+                    $('.premium_value').html(vehicle_premium.toLocaleString());
+                    $('.premium_deposit').html(data.deposit.toLocaleString());
+                    $('.premium_facility_fee').html(data.cost.toLocaleString());
+                    $('.premium_payable').html(data.total.toLocaleString());
+                    $('.premium_installment').html(data.installment.toLocaleString());
                     $('#progress_modal').modal('hide');
                     $('#quotation_details').modal('show');
                 } else {
@@ -207,6 +209,19 @@
 
             $(this).find('fa-spin').addClass('d-none');
             // $('#message_modal').modal('hide');
+        });
+
+        $(document).on('keyup', '.number-input', function() {
+            // skip for arrow keys
+            if (event.which >= 37 && event.which <= 40) return;
+
+            // format number
+            $(this).val(function(index, value) {
+                return value
+                    .replace(/\D/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+
         });
     </script>
 @endsection

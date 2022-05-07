@@ -63,7 +63,8 @@
                                             <div class="form-group">
                                                 <label>Organisation Email</label>
                                                 <input type="number" class="form-control" name="organisation_email"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Organisation Email">
+                                                    aria-describedby="plateHelp" required
+                                                    placeholder="Enter Organisation Email">
                                             </div>
                                         </div>
 
@@ -71,14 +72,16 @@
                                             <div class="form-group">
                                                 <label>Organisation Phone</label>
                                                 <input type="text" class="form-control" name="organisation_msisdn"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Organisation Phone">
+                                                    aria-describedby="plateHelp" required
+                                                    placeholder="Enter Organisation Phone">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>Organisation Contact</label>
                                                 <input type="number" class="form-control" name="organisation_contact"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Organisation Contant">
+                                                    aria-describedby="plateHelp" required
+                                                    placeholder="Enter Organisation Contant">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
@@ -125,30 +128,39 @@
                                 <th>Actions</th>
                             </thead>
                             <tbody>
-                                @foreach ($organisations as $organisation)
-                                    <tr>
-                                        <td>{{ $organisation->organisation_id }}</td>
-                                        <td>{{ $organisation->organisation_name }}</td>
-                                        <td>{{ $organisation->organisation_type }}</td>
-                                        <td>{{ $organisation->organisation_code }}</td>
-                                        <td>{{ $organisation->organisation_email }}</td>
-                                        <td>{{ $organisation->organisation_msisdn }}</td>
-                                        <td>{{ $organisation->organisation_contact }}</td>
-                                        <td>{{ date('Y-m-d H:i:s', $organisation->date_time_added) }}
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                data-target="#details{{ $organisation->organisation_id }}"><i
-                                                    class="zmdi zmdi-eye"></i>Details</button>
-                                            <button type="button" class="btn btn-warning btn-sm ml-2" data-toggle="modal"
-                                                data-target="#edit{{ $organisation->organisation_id }}"><i
-                                                    class="zmdi zmdi-edit"></i>Edit</button>
-                                        </td>
-                                        {{-- Modals --}}
-                                        @include('content.includes.organisations.organisation_details')
-                                        @include('content.includes.organisations.edit_organisation')
-                                    </tr>
-                                @endforeach
+                                @if ($organisations)
+                                    @foreach ($organisations as $organisation)
+                                        <tr>
+                                            <td>{{ $organisation->organisation_id }}</td>
+                                            <td>{{ $organisation->organisation_name }}</td>
+                                            <td>{{ $organisation->organisation_type }}</td>
+                                            <td>{{ $organisation->organisation_code }}</td>
+                                            <td>{{ $organisation->organisation_email }}</td>
+                                            <td>{{ $organisation->organisation_msisdn }}</td>
+                                            <td>{{ $organisation->organisation_contact }}</td>
+                                            <td>{{ date('Y-m-d H:i:s', $organisation->date_time_added) }}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
+                                                    data-target="#details{{ $organisation->organisation_id }}"><i
+                                                        class="zmdi zmdi-eye"></i>Details</button>
+                                                <button type="button" class="btn btn-warning btn-sm ml-2"
+                                                    data-toggle="modal"
+                                                    data-target="#edit{{ $organisation->organisation_id }}"><i
+                                                        class="zmdi zmdi-edit"></i>Edit</button>
+                                            </td>
+                                            {{-- Modals --}}
+                                            @include(
+                                                'content.includes.organisations.organisation_details'
+                                            )
+                                            @include(
+                                                'content.includes.organisations.edit_organisation'
+                                            )
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <td colspan="9" class="text-center">No data available in table</td>
+                                @endif
                             </tbody>
                         </table>
                     </div>

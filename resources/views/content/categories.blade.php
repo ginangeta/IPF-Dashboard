@@ -89,30 +89,39 @@
                                     <th>Actions</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $category)
-                                        <tr>
-                                            <td>{{ $category->category_id }}</td>
-                                            <td>{{ $category->category }}</td>
-                                            <td>{{ $category->brief }}</td>
-                                            <td>{{ $category->category_status }}</td>
-                                            <td>{{ date("Y-m-d H:i:s",$category->date_time_added) }}
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                    data-target="#details{{ $category->category_id }}"><i
-                                                        class="zmdi zmdi-eye"></i>Details</button>
-                                                <button type="button" class="btn btn-warning btn-sm ml-2"
-                                                    data-toggle="modal"
-                                                    data-target="#edit{{ $category->category_id }}"><i
-                                                        class="zmdi zmdi-edit"></i>Edit</button>
-                                            </td>
-                                            {{-- Modals --}}
-                                        </td>
-                                        {{-- Modals --}}
-                                        @include('content.includes.categories.categories_details')
-                                        @include('content.includes.categories.edit_categories')
-                                        </tr>
-                                    @endforeach
+                                    @if ($categories)
+                                        @foreach ($categories as $category)
+                                            <tr>
+                                                <td>{{ $category->category_id }}</td>
+                                                <td>{{ $category->category }}</td>
+                                                <td>{{ $category->brief }}</td>
+                                                <td>{{ $category->category_status }}</td>
+                                                <td>{{ date('Y-m-d H:i:s', $category->date_time_added) }}
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info btn-sm ml-2"
+                                                        data-toggle="modal"
+                                                        data-target="#details{{ $category->category_id }}"><i
+                                                            class="zmdi zmdi-eye"></i>Details</button>
+                                                    <button type="button" class="btn btn-warning btn-sm ml-2"
+                                                        data-toggle="modal"
+                                                        data-target="#edit{{ $category->category_id }}"><i
+                                                            class="zmdi zmdi-edit"></i>Edit</button>
+                                                </td>
+                                                {{-- Modals --}}
+                                                </td>
+                                                {{-- Modals --}}
+                                                @include(
+                                                    'content.includes.categories.categories_details'
+                                                )
+                                                @include(
+                                                    'content.includes.categories.edit_categories'
+                                                )
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <td colspan="6" class="text-center">No data available in table</td>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

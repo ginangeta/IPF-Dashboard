@@ -108,46 +108,54 @@
                                     <th>Actions</th>
                                 </thead>
                                 <tbody>
-                                    <form method="POST" id="sendMessageForm" action="{{ url('sendMessage') }}">
-                                        @foreach ($customers as $customer)
-                                            <tr>
-                                                <td>
-                                                    <input type="checkbox" value="{{ $customer->msisdn }}"
-                                                        class="form-control customers-checkbox" name="contacts">
-                                                </td>
-                                                <td><a href="{{ route('customers.cover', $customer->customer_id ) }}">
-                                                        {{ $customer->first_name . ' ' . $customer->last_name }}
-                                                    </a>
-                                                </td>
-                                                <td>{{ $customer->customer_status }}</td>
-                                                <td>{{ $customer->msisdn }}</td>
-                                                <td>{{ $customer->id_number }}</td>
-                                                <td>{{ $customer->email_address }}</td>
-                                                <td>{{ $customer->pin_number }}</td>
-                                                <td>{{ $customer->registered_by_msisdn }}</td>
-                                                <td>
-                                                    {{ date('Y-m-d H:i:s', $customer->date_time_added) }}
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('lead.quotation.view', $customer->customer_id) }}"
-                                                        class="btn btn-success btn-sm ml-2">
-                                                        Quote
-                                                    </a>
-                                                    <button type="button" class="btn btn-info btn-sm ml-2"
-                                                        data-toggle="modal"
-                                                        data-target="#details{{ $customer->customer_id }}"><i
-                                                            class="zmdi zmdi-eye"></i>Details</button>
-                                                    <button type="button" class="btn btn-warning btn-sm ml-2"
-                                                        data-toggle="modal"
-                                                        data-target="#edit{{ $customer->customer_id }}"><i
-                                                            class="zmdi zmdi-edit"></i>Edit</button>
-                                                </td>
-                                                {{-- Modals --}}
-                                                @include('content.includes.customers.customer_details')
-                                                @include('content.includes.customers.edit_customer')
-                                            </tr>
-                                        @endforeach
-                                    </form>
+                                    @if ($customers)
+                                        <form method="POST" id="sendMessageForm" action="{{ url('sendMessage') }}">
+                                            @foreach ($customers as $customer)
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" value="{{ $customer->msisdn }}"
+                                                            class="form-control customers-checkbox" name="contacts">
+                                                    </td>
+                                                    <td><a href="{{ route('customers.cover', $customer->customer_id) }}">
+                                                            {{ $customer->first_name . ' ' . $customer->last_name }}
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ $customer->customer_status }}</td>
+                                                    <td>{{ $customer->msisdn }}</td>
+                                                    <td>{{ $customer->id_number }}</td>
+                                                    <td>{{ $customer->email_address }}</td>
+                                                    <td>{{ $customer->pin_number }}</td>
+                                                    <td>{{ $customer->registered_by_msisdn }}</td>
+                                                    <td>
+                                                        {{ date('Y-m-d H:i:s', $customer->date_time_added) }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('lead.quotation.view', $customer->customer_id) }}"
+                                                            class="btn btn-success btn-sm ml-2">
+                                                            Quote
+                                                        </a>
+                                                        <button type="button" class="btn btn-info btn-sm ml-2"
+                                                            data-toggle="modal"
+                                                            data-target="#details{{ $customer->customer_id }}"><i
+                                                                class="zmdi zmdi-eye"></i>Details</button>
+                                                        <button type="button" class="btn btn-warning btn-sm ml-2"
+                                                            data-toggle="modal"
+                                                            data-target="#edit{{ $customer->customer_id }}"><i
+                                                                class="zmdi zmdi-edit"></i>Edit</button>
+                                                    </td>
+                                                    {{-- Modals --}}
+                                                    @include(
+                                                        'content.includes.customers.customer_details'
+                                                    )
+                                                    @include(
+                                                        'content.includes.customers.edit_customer'
+                                                    )
+                                                </tr>
+                                            @endforeach
+                                        </form>
+                                    @else
+                                        <td colspan="10" class="text-center">No data available in table</td>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

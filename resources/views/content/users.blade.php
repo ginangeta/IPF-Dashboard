@@ -136,34 +136,44 @@
                                 <th>Actions</th>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
-                                    {{-- @dd($user->user_roles) --}}
-                                    <tr>
-                                        <td>{{ $user->user_first_name . ' ' . $user->user_middle_name . ' ' . $user->user_last_name }}
-                                        </td>
-                                        <td>{{ $user->user_name }}</td>
-                                        <td>{{ $user->user_email }}</td>
-                                        <td>{{ $user->user_msisdn }}</td>
-                                        <td>{{ $user->user_type }}</td>
-                                        <td>{{ date('Y-m-d H:i a', $user->date_time_added) }}
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                data-target="#details{{ $user->user_id }}"><i
-                                                    class="zmdi zmdi-eye"></i>Details</button>
-                                            <button type="button" class="btn btn-warning btn-sm ml-2" data-toggle="modal"
-                                                data-target="#edit{{ $user->user_id }}"><i
-                                                    class="zmdi zmdi-edit"></i>Edit</button>
-                                            <button type="button" class="btn btn-danger btn-sm ml-2" data-toggle="modal"
-                                                data-target="#reset_password{{ $user->user_id }}"><i
-                                                    class="zmdi zmdi-edit"></i>Reset Password</button>
-                                        </td>
-                                        {{-- Modals --}}
-                                        @include('content.includes.users.user_details')
-                                        @include('content.includes.users.edit_password')
-                                        @include('content.includes.users.edit_user')
-                                    </tr>
-                                @endforeach
+                                @if ($users)
+                                    @foreach ($users as $user)
+                                        {{-- @dd($user->user_roles) --}}
+                                        <tr>
+                                            <td>{{ $user->user_first_name . ' ' . $user->user_middle_name . ' ' . $user->user_last_name }}
+                                            </td>
+                                            <td>{{ $user->user_name }}</td>
+                                            <td>{{ $user->user_email }}</td>
+                                            <td>{{ $user->user_msisdn }}</td>
+                                            <td>{{ $user->user_type }}</td>
+                                            <td>{{ date('Y-m-d H:i a', $user->date_time_added) }}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
+                                                    data-target="#details{{ $user->user_id }}"><i
+                                                        class="zmdi zmdi-eye"></i>Details</button>
+                                                <button type="button" class="btn btn-warning btn-sm ml-2"
+                                                    data-toggle="modal" data-target="#edit{{ $user->user_id }}"><i
+                                                        class="zmdi zmdi-edit"></i>Edit</button>
+                                                <button type="button" class="btn btn-danger btn-sm ml-2" data-toggle="modal"
+                                                    data-target="#reset_password{{ $user->user_id }}"><i
+                                                        class="zmdi zmdi-edit"></i>Reset Password</button>
+                                            </td>
+                                            {{-- Modals --}}
+                                            @include(
+                                                'content.includes.users.user_details'
+                                            )
+                                            @include(
+                                                'content.includes.users.edit_password'
+                                            )
+                                            @include(
+                                                'content.includes.users.edit_user'
+                                            )
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <td colspan="7" class="text-center">No data available in table</td>
+                                @endif
                             </tbody>
                         </table>
                     </div>

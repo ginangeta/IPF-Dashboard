@@ -197,7 +197,14 @@ class CustomersController extends Controller
             "offer_id" => "required",
             "premium" => "required",
             "start_date" => "required",
-            "tenure" => "required"
+            "tenure" => "required",
+            "car_make" => "required",
+            "car_model" => "required",
+            "car_value" => "required",
+            "use_type" => "required",
+            "cover_type" => "required",
+            "chassis_number" => "required",
+            "year_of_registration" => "required"
         ]);
 
         $data = [
@@ -213,7 +220,14 @@ class CustomersController extends Controller
             "offer_id" => (int)request()->offer_id,
             "premium" => (int)request()->premium,
             "start_date" => request()->start_date,
-            "tenure" => (int)request()->tenure
+            "tenure" => (int)request()->tenure,
+            "car_make" => request()->car_make,
+            "car_model" => request()->car_model,
+            "car_value" => (int)request()->car_value,
+            "use_type" => request()->use_type,
+            "cover_type" => request()->cover_type,
+            "chassis_number" => request()->chassis_number,
+            "year_of_registration" => (int)request()->year_of_registration
         ];
         $customers_response = $this->to_curl($customers_url, $data);
         $customers_data = json_decode($customers_response);
@@ -243,10 +257,13 @@ class CustomersController extends Controller
             "start_date" => strtotime(request()->start_date),
             "tenure" => (int)request()->tenure,
             "use_type" => request()->use_type,
+            "car_make" => request()->car_make,
+            "car_model" => request()->car_model,
+            "cover_type" => request()->cover_type,
             "car_value" => (int)request()->car_value,
-            "chassis_number" => request()->chassisNumber,
-            "yearOfManufacture" => request()->year_of_manufacture,
-            "yearOfRegistration" => request()->year_of_registration,
+            "chassis_number" => request()->chassis_number,
+            "yearOfManufacture" => (int)request()->year_of_manufacture,
+            "yearOfRegistration" => (int)request()->year_of_registration,
         ];
 
         $customers_cover_url = $this->url . 'customer_covers';
@@ -287,8 +304,14 @@ class CustomersController extends Controller
         $offers_data = json_decode($offers_response);
 
         $quotation_data = Session::get('quotation_' . $id);
+        $enum_data = Session::get('enum_data');
 
-        // dd($quotation_data);
+
+        // $enum_url = config('urls.auth') . '/api/v1/enums?enum_type=type_cover_type';
+        // $enum_response = $this->get_curl($enum_url);
+        // $enum_data = json_decode($enum_response);
+
+        // dd($enum_data);
 
         if (isset($offers_data->code)) {
             return redirect()->route('signin');
@@ -296,7 +319,8 @@ class CustomersController extends Controller
             return view('content.lead_application', [
                 'customers' => $customers_data->resource,
                 'offers' => $offers_data->results,
-                'quotation' => $quotation_data
+                'quotation' => $quotation_data,
+                'enum' => $enum_data,
             ]);
         }
     }
@@ -423,6 +447,7 @@ class CustomersController extends Controller
             return Redirect::back()->withErrors($data->errors[0]->message);
         }
     }
+
     public function getCustomerPayments($id = null)
     {
         $this->url = config('urls.url');
@@ -475,13 +500,13 @@ class CustomersController extends Controller
             'vehicle_premium' => request()->vehicle_premium,
             "offer_id" => $offers_data->results[0]->offer_id,
             "car_value" => request()->value,
+            "tenor" => request('tenor')
         ];
 
         // dd($quotation_data);
         Session::put('quotation_' . request()->customer_id, $quotation_data);
         return response()->json($data);
     }
-
 
     public function submitApplicationPayment()
     {

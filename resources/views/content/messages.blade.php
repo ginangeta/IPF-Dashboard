@@ -20,26 +20,30 @@
                                     <th>Date Sent</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($messages as $message)
-                                        <tr>
-                                            <td><a
-                                                    href="@if ($message->template_id) {{ route('message.template', @$message->template_id) }} @endif">
-                                                    {{ $message->message_id }}
-                                                </a>
-                                            </td>
-                                            <td>{{ $message->message_status }}</td>
-                                            <td>{{ $message->subject }}</td>
-                                            <td>{{ $message->recipient }}</td>
-                                            <td>
-                                                <span style="max-width:150px; white-space: normal;">
-                                                    {{ $message->message }}
-                                                </span>
-                                            </td>
-                                            <td>{{ $message->sender }}</td>
-                                            <td>{{ date("Y-m-d H:i:s",$message->date_time_added) }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    @if ($messages)
+                                        @foreach ($messages as $message)
+                                            <tr>
+                                                <td><a
+                                                        href="@if ($message->template_id) {{ route('message.template', @$message->template_id) }} @endif">
+                                                        {{ $message->message_id }}
+                                                    </a>
+                                                </td>
+                                                <td>{{ $message->message_status }}</td>
+                                                <td>{{ $message->subject }}</td>
+                                                <td>{{ $message->recipient }}</td>
+                                                <td>
+                                                    <span style="max-width:150px; white-space: normal;">
+                                                        {{ $message->message }}
+                                                    </span>
+                                                </td>
+                                                <td>{{ $message->sender }}</td>
+                                                <td>{{ date('Y-m-d H:i:s', $message->date_time_added) }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <td colspan="7" class="text-center">No data available in table</td>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

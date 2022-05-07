@@ -203,7 +203,7 @@
 {{-- Toastr --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!--  Chartist Plugin  -->
-<script src="{{ url('assets/js/plugins/chartist.min.js') }}"></script>
+{{-- <script src="{{ url('assets/js/plugins/chartist.min.js') }}"></script> --}}
 <!--  Notifications Plugin    -->
 <script src="{{ url('assets/js/plugins/bootstrap-notify.js') }}"></script>
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->

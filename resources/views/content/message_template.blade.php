@@ -84,55 +84,59 @@
                                     <th>Date Sent</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($templates as $template)
-                                        <tr>
-                                            <td>
-                                                {{ $template->template_name }}
-                                            </td>
-                                            <td>{{ $template->template_status }}</td>
-                                            <td>
-                                                <span style="max-width:150px; white-space: normal;">
-                                                    <a href="#" data-toggle="modal"
-                                                        data-target="#details{{ $template->template_id }}">
-                                                        {{ strlen($template->template) > 50 ? substr($template->template, 0, 50) . '...' : $template->template }}
-                                                    </a>
-                                                </span>
-                                            </td>
-                                            <td>{{ $template->added_by }}</td>
-                                            <td>{{ date("Y-m-d H:i:s",$template->date_time_added) }}
-                                            </td>
+                                    @if ($templates)
+                                        @foreach ($templates as $template)
+                                            <tr>
+                                                <td>
+                                                    {{ $template->template_name }}
+                                                </td>
+                                                <td>{{ $template->template_status }}</td>
+                                                <td>
+                                                    <span style="max-width:150px; white-space: normal;">
+                                                        <a href="#" data-toggle="modal"
+                                                            data-target="#details{{ $template->template_id }}">
+                                                            {{ strlen($template->template) > 50 ? substr($template->template, 0, 50) . '...' : $template->template }}
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                                <td>{{ $template->added_by }}</td>
+                                                <td>{{ date('Y-m-d H:i:s', $template->date_time_added) }}
+                                                </td>
 
-                                            {{-- Modals --}}
-                                            <div class="modal fade" id="details{{ $template->template_id }}"
-                                                tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title text-capitalize"
-                                                                id="exampleModalLongTitle">
-                                                                {{ $template->template_name }}</h5>
-                                                            <button type="button" class="close"
-                                                                data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label>Template Content</label>
-                                                                <textarea rows="14" cols="50" class="form-control">{{ $template->template }}
-                                                            </textarea>
+                                                {{-- Modals --}}
+                                                <div class="modal fade" id="details{{ $template->template_id }}"
+                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title text-capitalize"
+                                                                    id="exampleModalLongTitle">
+                                                                    {{ $template->template_name }}</h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
                                                             </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-success btn-secondary"
-                                                                data-dismiss="modal">OK</button>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label>Template Content</label>
+                                                                    <textarea rows="14" cols="50" class="form-control">{{ $template->template }}
+                                                            </textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-success btn-secondary"
+                                                                    data-dismiss="modal">OK</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </tr>
-                                    @endforeach
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <td colspan="5" class="text-center">No data available in table</td>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

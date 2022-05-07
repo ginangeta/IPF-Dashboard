@@ -83,74 +83,79 @@
                                     <th>Actions</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $product)
-                                        <tr>
-                                            <td>{{ $product->product_id }}</td>
-                                            <td>{{ $product->product_name }}</td>
-                                            <td>{{ $product->product_status }}</td>
-                                            <td>{{ date("Y-m-d H:i:s",$product->date_time_added) }}
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                    data-target="#details{{ $product->product_id }}"><i
-                                                        class="zmdi zmdi-eye"></i>Details</button>
-                                                <button type="button" class="btn btn-warning btn-sm ml-2"
-                                                    data-toggle="modal"
-                                                    data-target="#edit-details{{ $product->product_id }}"><i
-                                                        class="zmdi zmdi-edit"></i>Edit</button>
-                                            </td>
-                                            {{-- Modals --}}
-                                            <div class="modal fade" id="details{{ $product->product_id }}"
-                                                tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title text-capitalize"
-                                                                id="exampleModalLongTitle">
-                                                                {{ $product->product_name }} Details</h5>
-                                                            <button type="button" class="close"
-                                                                data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h6><strong>Product Status</strong></h6>
-                                                            <p>{{ $product->product_status }}</p>
-                                                            <hr>
+                                    @if ($products)
+                                        @foreach ($products as $product)
+                                            <tr>
+                                                <td>{{ $product->product_id }}</td>
+                                                <td>{{ $product->product_name }}</td>
+                                                <td>{{ $product->product_status }}</td>
+                                                <td>{{ date('Y-m-d H:i:s', $product->date_time_added) }}
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info btn-sm ml-2"
+                                                        data-toggle="modal"
+                                                        data-target="#details{{ $product->product_id }}"><i
+                                                            class="zmdi zmdi-eye"></i>Details</button>
+                                                    <button type="button" class="btn btn-warning btn-sm ml-2"
+                                                        data-toggle="modal"
+                                                        data-target="#edit-details{{ $product->product_id }}"><i
+                                                            class="zmdi zmdi-edit"></i>Edit</button>
+                                                </td>
+                                                {{-- Modals --}}
+                                                <div class="modal fade" id="details{{ $product->product_id }}"
+                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title text-capitalize"
+                                                                    id="exampleModalLongTitle">
+                                                                    {{ $product->product_name }} Details</h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h6><strong>Product Status</strong></h6>
+                                                                <p>{{ $product->product_status }}</p>
+                                                                <hr>
 
-                                                            <h6><strong>Product Category</strong></h6>
-                                                            <p>{{ $product->category_id }}</p>
-                                                            <hr>
+                                                                <h6><strong>Product Category</strong></h6>
+                                                                <p>{{ $product->category_id }}</p>
+                                                                <hr>
 
-                                                            <h6><strong>Date Added</strong></h6>
-                                                            {{-- <p class="mb-0">{{ $product->modified_by }}</p> --}}
-                                                            <small class="mb-0">
-                                                                {{ date("Y-m-d H:i:s",$product->date_time_added) }}
-                                                            </small>
-                                                            <hr>
+                                                                <h6><strong>Date Added</strong></h6>
+                                                                {{-- <p class="mb-0">{{ $product->modified_by }}</p> --}}
+                                                                <small class="mb-0">
+                                                                    {{ date('Y-m-d H:i:s', $product->date_time_added) }}
+                                                                </small>
+                                                                <hr>
 
-                                                            <h6><strong>Last Modified</strong></h6>
-                                                            {{-- <p class="mb-0">{{ $product->modified_by }}</p> --}}
-                                                            <small class="mb-0">
-                                                                {{ date("Y-m-d H:i:s",$product->date_time_added) }}
-                                                            </small>
-                                                            <hr>
+                                                                <h6><strong>Last Modified</strong></h6>
+                                                                {{-- <p class="mb-0">{{ $product->modified_by }}</p> --}}
+                                                                <small class="mb-0">
+                                                                    {{ date('Y-m-d H:i:s', $product->date_time_added) }}
+                                                                </small>
+                                                                <hr>
 
-                                                            <h6 class="text-left"><strong>Record Version</strong>
-                                                            </h6>
-                                                            <p>{{ $product->record_version }}</p>
-                                                            <hr>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-success btn-secondary"
-                                                                data-dismiss="modal">OK</button>
+                                                                <h6 class="text-left"><strong>Record Version</strong>
+                                                                </h6>
+                                                                <p>{{ $product->record_version }}</p>
+                                                                <hr>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-success btn-secondary"
+                                                                    data-dismiss="modal">OK</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </tr>
-                                    @endforeach
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <td colspan="5" class="text-center">No data available in table</td>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

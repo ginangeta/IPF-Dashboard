@@ -1,7 +1,7 @@
 @extends('frame')
 @section('title')
     @if ($single)
-        Customers Covers for Customer Number {{ $single ?? '' }}
+        {{ $customers[0]->first_name ?? '' }}'s Covers
     @else
         Customers Covers
     @endif
@@ -77,6 +77,7 @@
                             <table class="table-hover table-striped table" id="data-table">
                                 <thead>
                                     <th>#</th>
+                                    <th>Customer</th>
                                     <th>Cover Status</th>
                                     <th>Cover Type</th>
                                     <th>Car Reg Number</th>
@@ -98,6 +99,16 @@
                                                 <td><a href="{{ route('lead.payment', $customer->customer_cover_id) }}">
                                                         {{ $customer->customer_cover_id }}
                                                     </a>
+                                                </td>
+                                                <td>
+                                                    <p class="mb-0" style="font-size: revert;">
+                                                        {{ $customer->first_name . ' ' . $customer->last_name }}
+                                                    </p>
+                                                    <small>
+                                                        <a href="tel:{{ $customer->msisdn }}">
+                                                            {{ $customer->msisdn }}
+                                                        </a>
+                                                    </small>
                                                 </td>
                                                 <td>{{ $customer->customer_cover_status }}</td>
                                                 <td>{{ $customer->cover_type }}</td>
@@ -135,11 +146,7 @@
                                             </tr>
                                         @endforeach
                                     @else
-                                        <tr>
-                                            <td colspan="14">
-                                                <p class="text-center">no data found</p>
-                                            </td>
-                                        </tr>
+                                        <td colspan="15" class="text-center">No data available in table</td>
                                     @endif
                                 </tbody>
                             </table>

@@ -29,8 +29,17 @@ class SiteController extends Controller
                 $customers_response = $this->get_curl($customers_url);
                 $customers_data = json_decode($customers_response);
 
+                $enum_url = config('urls.auth') . '/api/v1/enums?page_size=100';
+                $enum_response = $this->get_curl($enum_url);
+                $enum_data = json_decode($enum_response);
+
+                if ($enum_data && $enum_data->response_code == 200) {
+                    Session::put('enum_data', $enum_data->results);
+                }
+
                 return view('content.dashboard', ['customers' => $customers_data->results]);
             } else {
+                // dd($data);
                 return Redirect::back()->withErrors($data->errors[0]->message);
             }
         } else {
