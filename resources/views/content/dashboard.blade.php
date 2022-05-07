@@ -60,6 +60,7 @@
                             <table class="table-hover table-striped table" id="data-table">
                                 <thead>
                                     <th>#</th>
+                                    <th>Customer</th>
                                     <th>Cover Status</th>
                                     <th>Cover Type</th>
                                     <th>Car Reg Number</th>
@@ -79,6 +80,16 @@
                                                 <td><a href="{{ route('lead.payment', $customer->customer_cover_id) }}">
                                                         {{ $customer->customer_cover_id }}
                                                     </a>
+                                                </td>
+                                                <td>
+                                                    <p class="mb-0" style="font-size: revert;">
+                                                        {{ $customer->first_name . ' ' . $customer->last_name }}
+                                                    </p>
+                                                    <small>
+                                                        <a href="tel:{{ $customer->msisdn }}">
+                                                            {{ $customer->msisdn }}
+                                                        </a>
+                                                    </small>
                                                 </td>
                                                 <td>{{ $customer->customer_cover_status }}</td>
                                                 <td>{{ $customer->cover_type }}</td>
@@ -114,7 +125,7 @@
                                             </tr>
                                         @endforeach
                                     @else
-                                        <td colspan="12" class="text-center">No data available in table</td>
+                                        <td colspan="13" class="text-center">No data available in table</td>
                                     @endif
                                 </tbody>
                             </table>
