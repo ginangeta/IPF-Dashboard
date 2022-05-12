@@ -51,8 +51,11 @@
                                 <div class="col-md-6 col-sm-12">
                                     <label for="vehicle">Tenor</label>
                                     <select class="form-control" name="tenor">
-                                        <option value="annually"> Annual
-                                        </option>
+                                        @foreach ($tenor_types as $tenor_type)
+                                            <option value="{{ $tenor_type->enum_label }}">
+                                                {{ Illuminate\Support\Str::upper($tenor_type->enum_label) }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

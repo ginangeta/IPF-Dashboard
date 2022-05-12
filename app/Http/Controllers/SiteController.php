@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class SiteController extends Controller
 {
@@ -104,6 +105,13 @@ class SiteController extends Controller
         $categories_response = $this->get_curl($categories_url);
         $categories_data = json_decode($categories_response);
 
+        $enum_url = config('urls.auth') . 'api/v1/enums?enum_type=type_tenor_type';
+        $enum_response = $this->get_curl($enum_url);
+        $enum_data = json_decode($enum_response);
+
+        // dd($enum_data, Str::upper('gina'));
+
+
         // dd($offers_data);
 
         if (isset($offers_data->code)) {
@@ -112,7 +120,8 @@ class SiteController extends Controller
             return view('content.calculator', [
                 'offers' => $offers_data->results,
                 'categories' => $categories_data->results,
-                'products' => $products_data->results
+                'products' => $products_data->results,
+                'tenor_types' => $enum_data->results
             ]);
         }
     }
