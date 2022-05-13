@@ -12,15 +12,16 @@
                             Successfully
                         </h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-flex justify-content-center align-items-center">
                         <img src="{{ url('img/happy_payment.jpg') }}" alt="logo" class="img-fluid mt-4">
                     </div>
-
-                    <p class="text-center">
-                        <small class="p-4">Kindly ensure that customer has received notification of the
-                            successful
-                            registration</small>
-                    </p>
+                    <div class="card-footer">
+                        <p class="text-center">
+                            <small>Kindly ensure that customer has received notification of the
+                                successful
+                                registration</small>
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-7 col-sm-12">

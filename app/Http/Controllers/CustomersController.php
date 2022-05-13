@@ -367,7 +367,7 @@ class CustomersController extends Controller
         $enum_response = $this->get_curl($enum_url);
         $enum_data = json_decode($enum_response);
 
-        // dd($offers_data);
+        // dd($enum_data);
 
         if (isset($offers_data->code)) {
             return redirect()->route('signin');

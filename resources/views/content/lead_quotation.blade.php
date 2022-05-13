@@ -116,9 +116,11 @@
                             <div class="col-md-4 col-sm-12">
                                 <label for="vehicle">IPF Term</label>
                                 <select class="form-control" name="tenor">
-                                    <option value="{{ $tenor_type->enum_label }}">
-                                        {{ Illuminate\Support\Str::upper($tenor_type->enum_label) }}
-                                    </option>
+                                    @foreach ($tenor_types as $tenor_type)
+                                        <option value="{{ $tenor_type->enum_label }}">
+                                            {{ Illuminate\Support\Str::upper($tenor_type->enum_label) }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-4 col-sm-12">
