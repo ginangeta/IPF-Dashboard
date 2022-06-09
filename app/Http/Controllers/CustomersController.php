@@ -307,9 +307,9 @@ class CustomersController extends Controller
         $enum_data = Session::get('enum_data');
 
 
-        // $enum_url = config('urls.auth') . '/api/v1/enums?enum_type=type_cover_type';
-        // $enum_response = $this->get_curl($enum_url);
-        // $enum_data = json_decode($enum_response);
+        $enum_url = config('urls.auth') . '/api/v1/enums?enum_type=type_tenor_type';
+        $enum_response = $this->get_curl($enum_url);
+        $enum_data = json_decode($enum_response);
 
         // dd($enum_data);
 

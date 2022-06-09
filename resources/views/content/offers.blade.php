@@ -89,8 +89,11 @@
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>Tenure</label>
-                                                <input type="number" class="form-control" name="tenure"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Tenure">
+                                                <select name="tenure" class="form-control" id="tenure">
+                                                    <option value="3">3 Installments </option>
+                                                    <option value="6">6 Installments</option>
+                                                    <option value="10">10 Installments</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
@@ -157,12 +160,8 @@
                                                         class="zmdi zmdi-edit"></i>Edit</button>
                                             </td>
                                             {{-- Modals --}}
-                                            @include(
-                                                'content.includes.offers.offer_details'
-                                            )
-                                            @include(
-                                                'content.includes.offers.edit_offer'
-                                            )
+                                            @include('content.includes.offers.offer_details')
+                                            @include('content.includes.offers.edit_offer')
                                         </tr>
                                     @endforeach
                                 @else
