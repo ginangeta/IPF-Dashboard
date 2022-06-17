@@ -35,11 +35,13 @@
                                             <div class="form-group">
                                                 <label>Product Category</label>
                                                 <select name="category_id" class="form-control" id="category_id">
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->category_id }}">
-                                                            {{ $category->category }}
-                                                        </option>
-                                                    @endforeach
+                                                    @if ($categories)
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->category_id }}">
+                                                                {{ $category->category }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>
@@ -47,11 +49,13 @@
                                             <div class="form-group">
                                                 <label>Product</label>
                                                 <select name="product_id" class="form-control" id="product_id">
-                                                    @foreach ($products as $product)
-                                                        <option value="{{ $product->product_id }}">
-                                                            {{ $product->product_name }}
-                                                        </option>
-                                                    @endforeach
+                                                    @if ($products)
+                                                        @foreach ($products as $product)
+                                                            <option value="{{ $product->product_id }}">
+                                                                {{ $product->product_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>
@@ -152,8 +156,8 @@
                                             <td>{{ date('Y-m-d H:i:s', $offer->date_time_added) }}
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-info btn-sm ml-2" data-toggle="modal"
-                                                    data-target="#details{{ $offer->offer_id }}"><i
+                                                <button type="button" class="btn btn-info btn-sm ml-2"
+                                                    data-toggle="modal" data-target="#details{{ $offer->offer_id }}"><i
                                                         class="zmdi zmdi-eye"></i>Details</button>
                                                 <button type="button" class="btn btn-warning btn-sm ml-2"
                                                     data-toggle="modal" data-target="#edit{{ $offer->offer_id }}"><i

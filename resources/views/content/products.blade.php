@@ -35,11 +35,13 @@
                                             <div class="form-group">
                                                 <label>Product Category</label>
                                                 <select name="category_id" class="form-control" id="category_id">
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->category_id }}">
-                                                            {{ $category->category }}
-                                                        </option>
-                                                    @endforeach
+                                                    @if ($categories)
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->category_id }}">
+                                                                {{ $category->category }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>
@@ -111,8 +113,8 @@
                                                                 <h5 class="modal-title text-capitalize"
                                                                     id="exampleModalLongTitle">
                                                                     {{ $product->product_name }} Details</h5>
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal" aria-label="Close">
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>

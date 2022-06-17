@@ -74,21 +74,25 @@
                                 <div class="form-group">
                                     <label for="vehicle">Underwriter</label>
                                     <select class="form-control" name="category_id">
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->category_id }}">
-                                                {{ $category->category }}
-                                            </option>
-                                        @endforeach
+                                        @if ($categories)
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->category_id }}">
+                                                    {{ $category->category }}
+                                                </option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <label for="vehicle">Product</label>
                                 <select class="form-control" name="product_id">
-                                    @foreach ($products as $product)
-                                        <option value="{{ $product->product_id }}">{{ $product->product_name }}
-                                        </option>
-                                    @endforeach
+                                    @if ($products)
+                                        @foreach ($products as $product)
+                                            <option value="{{ $product->product_id }}">{{ $product->product_name }}
+                                            </option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="col-md-4 col-sm-12">

@@ -31,6 +31,22 @@ class CategoriesController extends Controller
         }
     }
 
+
+    public function getCategoryProducts()
+    {
+        $this->url = config('urls.url');
+        $products_url = $this->url . 'products?category_id=' . request()->category_id;
+        $products_response = $this->get_curl($products_url);
+        $products_data = json_decode($products_response);
+        // dd($products_data->results);
+
+        if (isset($products_data->code)) {
+            return redirect()->route('signin');
+        } else {
+            return response($products_data->results, 200);
+        }
+    }
+
     public function storeCategories()
     {
         // dd(request()->all());

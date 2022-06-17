@@ -63,6 +63,9 @@ Route::get('/categories', [CategoriesController::class, 'getCategories'])->name(
 Route::post('/categories', [CategoriesController::class, 'storeCategories'])->name('categories');
 Route::post('/edit_category/{id}', [CategoriesController::class, 'editCategories'])->name('edit.category');
 
+Route::post('/categories_products', [CategoriesController::class, 'getCategoryProducts'])->name('category.products');
+
+
 Route::get('/products', [ProductsController::class, 'getProducts'])->name('products');
 Route::post('/products', [ProductsController::class, 'storeProduct'])->name('products');
 

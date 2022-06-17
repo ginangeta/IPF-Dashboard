@@ -68,6 +68,7 @@ class Controller extends BaseController
         curl_close($ch);
         return $output;
     }
+    
     function old_put_curl($url, $data)
     {
         $headers = array(
