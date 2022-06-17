@@ -109,14 +109,9 @@
                                                             class="zmdi zmdi-edit"></i>Edit</button>
                                                 </td>
                                                 {{-- Modals --}}
-                                                </td>
+                                                @include('content.includes.categories.categories_details')
+                                                @include('content.includes.categories.edit_categories')
                                                 {{-- Modals --}}
-                                                @include(
-                                                    'content.includes.categories.categories_details'
-                                                )
-                                                @include(
-                                                    'content.includes.categories.edit_categories'
-                                                )
                                             </tr>
                                         @endforeach
                                     @else

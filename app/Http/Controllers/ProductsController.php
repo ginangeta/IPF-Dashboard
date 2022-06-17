@@ -19,7 +19,7 @@ class ProductsController extends Controller
         $categories_url = $this->url . 'categories?page_size=100';
         $categories_response = $this->get_curl($categories_url);
         $categories_data = json_decode($categories_response);
-        // dd($products_data);
+        dd($products_data);
 
         if (isset($products_data->code)) {
             return redirect()->route('signin');
@@ -54,6 +54,43 @@ class ProductsController extends Controller
         $data = json_decode($response);
 
         // dd($data);
+        if ($data->response_code == 200) {
+            return Redirect::back();
+        } else {
+            return Redirect::back()->withErrors($data->errors[0]->message);
+        }
+    }
+
+    public function editProduct()
+    {
+        // dd(request()->all());
+        $this->url = config('urls.url');
+        $url = $this->url . 'products/' . request('product_id');
+
+        // dd($url);
+        $data = request()->validate([
+            "product_id" => ['required'],
+            "category_id" => ['required'],
+            "product_name" => ['required'],
+            "product_status" => ['required']
+        ]);
+
+        $data = [
+            "product_id" => (int)request()->product_id,
+            "category_id" => (int)request()->category_id,
+            "product_name" => request()->product_name,
+            "product_status" => request()->product_status
+        ];
+
+        // dd($data);
+
+        $response = $this->put_curl($url, $data);
+        $data = json_decode($response);
+
+        // dd($data);
+        // $status = $data->code;
+        // $message = $data->message;
+
         if ($data->response_code == 200) {
             return Redirect::back();
         } else {
