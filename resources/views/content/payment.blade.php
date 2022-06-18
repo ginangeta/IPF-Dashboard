@@ -72,7 +72,7 @@
                                 </strong>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
-                                <span>Instalment : </span>
+                                <span>Installment : </span>
                                 <strong>
                                     KES <span>{{ number_format(@$cover[0]->installment) }}</span>
                                 </strong>
@@ -101,7 +101,8 @@
                     <div class="card-footer">
                         <div class="d-flex justify-content-end">
                             {{-- <button type="button" class="cover_id btn btn-info btn-secondary">Pay</button> --}}
-                            <button type="button" class="notify_id btn btn-info btn-secondary">View Customer Covers</button>
+                            <button type="button" class="notify_id btn btn-info btn-secondary">View Customer
+                                Covers</button>
                         </div>
                     </div>
                 </div>
@@ -174,7 +175,8 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group pb-2">
-                                    <input type="date" class="form-control" id="exp_date" placeholder="Exp date (mm/yy)">
+                                    <input type="date" class="form-control" id="exp_date"
+                                        placeholder="Exp date (mm/yy)">
                                 </div>
                             </div>
                             <span class="btn btn-warning btn-round btn-block pay" id="pay" type="button">
@@ -189,7 +191,8 @@
                                 <label for="expected_name">Expected Name</label>
                                 <input type="text" name="expected_name" class="form-control" id="expected_name"
                                     placeholder="Enter Mpesa Expected Name" style="text-transform:uppercase">
-                                <span class="btn btn-primary btn-round btn-block pay mt-2" id="payment_push" type="button">
+                                <span class="btn btn-primary btn-round btn-block pay mt-2" id="payment_push"
+                                    type="button">
                                     Send Payment Push
                                 </span>
                             </div>
