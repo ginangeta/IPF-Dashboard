@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
-                                <label for="vehicle">Product</label>
+                                <label for="vehicle">IPF Term</label>
                                 <span>
                                     <div class="demo-container d-none">
                                         <div class="progress-bar">

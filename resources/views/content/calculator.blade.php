@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="product">Product</label>
+                                    <label for="product">IPF Term</label>
                                     <span>
                                         <div class="demo-container d-none">
                                             <div class="progress-bar">
