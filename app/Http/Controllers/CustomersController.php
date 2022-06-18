@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -306,6 +307,7 @@ class CustomersController extends Controller
         $quotation_data = Session::get('quotation_' . $id);
         $enum_data = Session::get('enum_data');
 
+        $years = range(Carbon::now()->year, 2000);
 
         $enum_url = config('urls.auth') . '/api/v1/enums?enum_type=type_tenor_type';
         $enum_response = $this->get_curl($enum_url);
@@ -321,6 +323,7 @@ class CustomersController extends Controller
                 'offers' => $offers_data->results,
                 'quotation' => $quotation_data,
                 'enum' => $enum_data,
+                'years' => $years,
             ]);
         }
     }

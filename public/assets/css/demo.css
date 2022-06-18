@@ -964,3 +964,28 @@ demo-container {
 }
 
 /* Progress Bar */
+
+
+/* Select 2 */
+
+.select2-container {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+.select2-container .select2-selection--single {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    height: 34px;
+    user-select: none;
+    justify-content: flex-start;
+    align-items: center;
+    -webkit-user-select: none;
+}
+
+/* Select 2 */

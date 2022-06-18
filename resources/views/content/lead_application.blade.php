@@ -50,8 +50,7 @@
                                 <div class="col-md-4 col-sm-12 d-none">
                                     <div class="form-group">
                                         <label>Lead Status</label>
-                                        <select name="customer_lead_status" class="form-control"
-                                            id="customer_lead_status">
+                                        <select name="customer_lead_status" class="form-control" id="customer_lead_status">
                                             <option value="PENDING_PAYMENT">Pending Payment</option>
                                             <option value="PAID">PAID</option>
                                         </select>
@@ -91,13 +90,22 @@
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label>Year of Manufacture</label>
-                                        <input type="number" class="form-control" name="year_of_manufacture">
+                                        <select name="year_of_manufacture" class="form-control" id="year_of_manufacture">
+                                            @foreach ($years as $year)
+                                                <option value="{{ $year }}">{{ $year }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label>Year of Registration</label>
-                                        <input type="number" class="form-control" name="year_of_registration">
+                                        <select name="year_of_registration" class="form-control"
+                                            id="year_of_registration">
+                                            @foreach ($years as $year)
+                                                <option value="{{ $year }}">{{ $year }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">

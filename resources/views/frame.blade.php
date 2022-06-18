@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
+    <!--  Select 2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- CSS Files -->
     <link href="{{ url('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ url('assets/css/light-bootstrap-dashboard.css?v=2.0.0') }}" rel="stylesheet" />
@@ -137,8 +141,9 @@
                     <a class="navbar-brand" href="#pablo">
                         @yield('title')
                     </a>
-                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button"
+                        data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false"
+                        aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -202,6 +207,8 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 {{-- Toastr --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+{{-- Select 2 --}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!--  Chartist Plugin  -->
 {{-- <script src="{{ url('assets/js/plugins/chartist.min.js') }}"></script> --}}
 <!--  Notifications Plugin    -->
@@ -217,6 +224,8 @@
         // demo.initDashboardPageCharts();
 
         setTimeout(fade_out, 2000);
+
+        $("select").select2();
 
         function fade_out() {
             $(".alert").fadeOut().empty();
