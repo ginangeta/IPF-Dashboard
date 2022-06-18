@@ -30,30 +30,32 @@
                                             <div class="form-group">
                                                 <label>First Name & Middle Name</label>
                                                 <input type="text" class="form-control" name="first_name"
-                                                    aria-describedby="plateHelp" required placeholder="Enter First Name"
-                                                    style="text-transform:capitalize">
+                                                    value="{{ old('first_name') }}" aria-describedby="plateHelp" required
+                                                    placeholder="Enter First Name" style="text-transform:capitalize">
                                             </div>
                                         </div>
                                         <div class="col-md-5 col-sm-12">
                                             <div class="form-group">
                                                 <label>Last name</label>
                                                 <input type="text" class="form-control" name="last_name"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Last Name"
-                                                    style="text-transform:capitalize">
+                                                    value="{{ old('last_name') }}" aria-describedby="plateHelp" required
+                                                    placeholder="Enter Last Name" style="text-transform:capitalize">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
                                                 <input type="number" class="form-control" name="msisdn"
-                                                    aria-describedby="plateHelp" required min="10" max="10"
+                                                    value="{{ old('msisdn') }}" aria-describedby="plateHelp" required
+                                                    min="10" max="10"
                                                     placeholder="Enter Phone Number (07xxxxxxxxx)">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label>Id Number</label>
-                                                <input type="number" class="form-control" name="id_number" min="8" max="8"
+                                                <input type="number" class="form-control" name="id_number" min="8"
+                                                    value="{{ old('id_number') }}" max="8"
                                                     aria-describedby="plateHelp" required placeholder="Enter Id Number">
                                             </div>
                                         </div>
@@ -62,8 +64,8 @@
                                             <div class="form-group">
                                                 <label>KRA Pin Number</label>
                                                 <input type="text" class="form-control" name="pin_number"
-                                                    style="text-transform: uppercase;" aria-describedby="plateHelp" required
-                                                    placeholder="Enter Pin Number">
+                                                    value="{{ old('pin_number') }}" style="text-transform: uppercase;"
+                                                    aria-describedby="plateHelp" required placeholder="Enter Pin Number">
                                             </div>
                                         </div>
 
@@ -71,7 +73,8 @@
                                             <div class="form-group">
                                                 <label>Customer's Email</label>
                                                 <input type="email" class="form-control" name="email_address"
-                                                    aria-describedby="plateHelp" required placeholder="Enter Email Address"
+                                                    value="{{ old('email_address') }}" aria-describedby="plateHelp"
+                                                    required placeholder="Enter Email Address"
                                                     style="text-transform:lowercase">
                                             </div>
                                         </div>

@@ -14,6 +14,8 @@ class AuthController extends Controller
 
     public function signin()
     {
+        Session::put('previous_url', url()->previous());
+
         return view('auth.login');
     }
 
@@ -78,7 +80,9 @@ class AuthController extends Controller
                     } else {
                         $previous_url = Session::get('previous_url');
 
-                        if (is_null($previous_url)) {
+                        // dd($previous_url);
+
+                        if (is_null($previous_url) || $previous_url == route('signin')) {
                             return redirect()->route('home');
                         } else {
                             return redirect()->intended($previous_url);
