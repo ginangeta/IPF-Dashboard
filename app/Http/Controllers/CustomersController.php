@@ -83,7 +83,7 @@ class CustomersController extends Controller
         }
     }
 
-    public function storeCustomers()
+    public function storeCustomers(Request $request)
     {
         $this->url = config('urls.url');
         $customers_url = $this->url . 'customers';
@@ -111,6 +111,8 @@ class CustomersController extends Controller
         $customers_response = $this->to_curl($customers_url, $data);
         $customers_data = json_decode($customers_response);
         // dd($customers_data);
+
+        $request->flash();
 
         if (empty($customers_data)) {
             return Redirect::back()->withErrors(['There is a technical error encountered, Please try again ']);
