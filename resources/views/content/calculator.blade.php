@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="vehicle">Product</label>
+                                    <label for="product">Product</label>
                                     <span>
                                         <div class="demo-container d-none">
                                             <div class="progress-bar">
@@ -162,8 +162,16 @@
         });
     </script>
     <script>
+        $(document).ready(function() {
+            getCategoryProducts();
+        });
+
         $(document).on('change', 'select[name=category_id]', function() {
-            $(this).removeClass('btn-primary').addClass('btn-outline-primary');
+            getCategoryProducts();
+        });
+
+        function getCategoryProducts() {
+            $('select[name=category_id]').removeClass('btn-primary').addClass('btn-outline-primary');
             $('.demo-container').removeClass('d-none');
             $('select[name=product_id]').prop('disabled', true);
             $('select[name=product_id]').empty();
@@ -174,8 +182,7 @@
                 }
             });
 
-            var category_id = $(this).val();
-            ''
+            var category_id = $('select[name=category_id]').val();
 
             $.post("{{ url('categories_products') }}", {
                 category_id: category_id,
@@ -208,6 +215,6 @@
                 $('.demo-container').addClass('d-none');
                 $('select[name=product_id]').prop('disabled', false);
             });
-        });
+        }
     </script>
 @endsection

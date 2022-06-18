@@ -68,6 +68,7 @@ Route::post('/categories_products', [CategoriesController::class, 'getCategoryPr
 
 Route::get('/products', [ProductsController::class, 'getProducts'])->name('products');
 Route::post('/products', [ProductsController::class, 'storeProduct'])->name('products');
+Route::post('/edit_product/{id}', [ProductsController::class, 'editProducts'])->name('edit.product');
 
 Route::get('/messages', [MessagesController::class, 'getMessages'])->name('messages');
 Route::post('/store_template', [MessagesController::class, 'storeMessagesTemplate'])->name('store.template');

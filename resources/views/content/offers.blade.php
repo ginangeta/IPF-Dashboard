@@ -46,18 +46,17 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Product</label>
-                                                <select name="product_id" class="form-control" id="product_id">
-                                                    @if ($products)
-                                                        @foreach ($products as $product)
-                                                            <option value="{{ $product->product_id }}">
-                                                                {{ $product->product_name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endif
+                                            <label for="product">Product</label>
+                                            <span>
+                                                <div class="demo-container d-none">
+                                                    <div class="progress-bar">
+                                                        <div class="progress-bar-value"></div>
+                                                    </div>
+                                                </div>
+                                                <select class="form-control" name="product_id"
+                                                    aria-placeholder="Product Id">
                                                 </select>
-                                            </div>
+                                            </span>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
@@ -94,6 +93,7 @@
                                             <div class="form-group">
                                                 <label>Tenure</label>
                                                 <select name="tenure" class="form-control" id="tenure">
+                                                    <option value="1">1 Installment </option>
                                                     <option value="3">3 Installments </option>
                                                     <option value="6">6 Installments</option>
                                                     <option value="10">10 Installments</option>
@@ -139,6 +139,8 @@
                                 <th>Interest Rate</th>
                                 <th>Deposit Formulae</th>
                                 <th>Installment Formulae</th>
+                                <th>Category Id</th>
+                                <th>Product Id</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </thead>
@@ -148,11 +150,13 @@
                                         <tr>
                                             <td>{{ $offer->offer_id }}</td>
                                             <td>{{ $offer->offer_status }}</td>
-                                            <td>{{ $offer->offer }}</td>
+                                            <td>{{ $offer->offer }} Installment(s)</td>
                                             <td>{{ $offer->tenure }}</td>
                                             <td>{{ $offer->interest_rate }}</td>
                                             <td>{{ $offer->deposit_formulae }}</td>
                                             <td>{{ $offer->installment_formulae }}</td>
+                                            <td>{{ $offer->category_id }}</td>
+                                            <td>{{ $offer->product_id }}</td>
                                             <td>{{ date('Y-m-d H:i:s', $offer->date_time_added) }}
                                             </td>
                                             <td>
@@ -178,4 +182,63 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            getCategoryProducts();
+        });
+
+        $(document).on('change', 'select[name=category_id]', function() {
+            getCategoryProducts();
+        });
+
+        function getCategoryProducts() {
+            $('select[name=category_id]').removeClass('btn-primary').addClass('btn-outline-primary');
+            $('.demo-container').removeClass('d-none');
+            $('select[name=product_id]').prop('disabled', true);
+            $('select[name=product_id]').empty();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '<?= csrf_token() ?>'
+                }
+            });
+
+            var category_id = $('select[name=category_id]').val();
+
+            $.post("{{ url('categories_products') }}", {
+                category_id: category_id,
+
+            }).done(function(data) {
+                console.log("ResponseText:" + data);
+                if (data) {
+                    $.each(data, function(i, item) {
+                        $('select[name=product_id]').append($('<option>', {
+                            value: item.product_id,
+                            text: item.product_name
+                        }));
+                    });
+
+                } else {
+                    // $('#payment_options').modal('show');
+                    $.each(data.errors, function(key, val) {
+                        toastr.error(val.message);
+                    });
+                }
+
+                $('.demo-container').addClass('d-none');
+                $('select[name=product_id]').prop('disabled', false);
+
+            }).fail(function(data) {
+                $.each(data.errors, function(key, val) {
+                    toastr.error(val.message);
+                });
+
+                $('.demo-container').addClass('d-none');
+                $('select[name=product_id]').prop('disabled', false);
+            });
+        }
+    </script>
 @endsection

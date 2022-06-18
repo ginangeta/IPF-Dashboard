@@ -12,14 +12,14 @@ class ProductsController extends Controller
     public function getProducts()
     {
         $this->url = config('urls.url');
-        $products_url = $this->url . 'products?page_size=100';
+        $products_url = $this->url . 'products?page_size=100&product_status=ACTIVE';
         $products_response = $this->get_curl($products_url);
         $products_data = json_decode($products_response);
 
         $categories_url = $this->url . 'categories?page_size=100';
         $categories_response = $this->get_curl($categories_url);
         $categories_data = json_decode($categories_response);
-        dd($products_data);
+        // dd($products_data);
 
         if (isset($products_data->code)) {
             return redirect()->route('signin');
@@ -61,7 +61,7 @@ class ProductsController extends Controller
         }
     }
 
-    public function editProduct()
+    public function editProducts()
     {
         // dd(request()->all());
         $this->url = config('urls.url');
@@ -72,17 +72,19 @@ class ProductsController extends Controller
             "product_id" => ['required'],
             "category_id" => ['required'],
             "product_name" => ['required'],
-            "product_status" => ['required']
+            "product_status" => ['required'],
+            "record_version" => ['required'],
         ]);
 
         $data = [
             "product_id" => (int)request()->product_id,
             "category_id" => (int)request()->category_id,
             "product_name" => request()->product_name,
-            "product_status" => request()->product_status
+            "product_status" => request()->product_status,
+            "record_version" => (int)request()->record_version
         ];
 
-        // dd($data);
+        // dd(json_encode($data));
 
         $response = $this->put_curl($url, $data);
         $data = json_decode($response);

@@ -35,11 +35,13 @@
                                             <div class="form-group">
                                                 <label>Product Category</label>
                                                 <select name="category_id" class="form-control" id="category_id">
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->category_id }}">
-                                                            {{ $category->category }}
-                                                        </option>
-                                                    @endforeach
+                                                    @if (@$categories)
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->category_id }}">
+                                                                {{ $category->category }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>
@@ -72,11 +74,22 @@
 
             <div class="col-12">
                 <div class="card">
+                    <div class="card-header">
+                        @if ($errors->any())
+                            <p class="alert alert-danger">{{ $errors->first() }}
+                            </p>
+                        @endif
+                        @if (Session::has('success'))
+                            <p class="alert alert-success">
+                                {{ Session::get('success') }}</p>
+                        @endif
+                    </div>
                     <div class="card-body">
                         <div class="card-body table-full-width table-responsive">
                             <table class="table-hover table-striped table" id="data-table">
                                 <thead>
                                     <th>Id</th>
+                                    <th>Category Id</th>
                                     <th>Name</th>
                                     <th>Status</th>
                                     <th>Created At</th>
@@ -87,6 +100,7 @@
                                         @foreach ($products as $product)
                                             <tr>
                                                 <td>{{ $product->product_id }}</td>
+                                                <td>{{ $product->category_id }}</td>
                                                 <td>{{ $product->product_name }}</td>
                                                 <td>{{ $product->product_status }}</td>
                                                 <td>{{ date('Y-m-d H:i:s', $product->date_time_added) }}

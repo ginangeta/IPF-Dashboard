@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body">
                 <form method="POST" class="form-horizontal" novalidate="" method="POST"
-                    action="{{ url('products') }}">
+                    action="{{ route('edit.product', $product->product_id) }}">
                     @csrf
                     @if ($errors->any())
                         <p class="alert alert-danger">{{ $errors->first() }}</p>
@@ -46,12 +46,20 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>Product Status</label>
-                                <select name="product_status" value="{{ $user->product_status }}" class="form-control"
-                                    id="product_status">
+                                <select name="product_status" value="{{ @$product->product_status }}"
+                                    class="form-control" id="product_status">
                                     <option value="ACTIVE">Active</option>
                                     <option value="INACTIVE">Inactive</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12">
+                            <label class="text-left"><strong>Record
+                                    Version</strong>
+                            </label>
+                            <input type="text" class="form-control" name="record_version"
+                                value="{{ @$product->record_version }}" aria-describedby="plateHelp" required
+                                $value="{{ @$product->record_version }}">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-info btn-fill pull-right">Submit
